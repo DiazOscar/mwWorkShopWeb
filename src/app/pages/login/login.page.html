@@ -1,28 +1,17 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding>
 
-  <ion-list>
+    <img class="icon" src="assets/img/charging-station.png"/>
+  <ion-list class="prueba">
     <ion-item>
       <ion-label position="floating">Usuario</ion-label>
       <ion-input type="text" [(ngModel)]="mail"></ion-input>  
     </ion-item>
 
-    <ion-item>
+    <ion-item >
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input type="password" [(ngModel)]="password"></ion-input>  
       </ion-item>
   </ion-list>
-
-  <ion-row>
-    <ion-col size="4"></ion-col>
-    <ion-col size="4">
-      <ion-button fill="solid" expand="block" color="dark" (click)="login()">Acceder</ion-button>
-    </ion-col>
-  </ion-row>
-
+      <ion-button class="prueba" fill="solid" expand="block" color="dark" (click)="login()">Acceder</ion-button>
+      <p class="text-center"> No estas registrado? <a href="/register">Registrate</a></p>
 </ion-content>

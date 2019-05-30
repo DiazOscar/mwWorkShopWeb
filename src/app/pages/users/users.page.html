@@ -13,7 +13,11 @@
         <ion-list class="list">
           <ion-item-sliding *ngFor="let user of users">
           <ion-item>
-              <ion-text> <h1> {{ user.id }}</h1></ion-text>           
+              <ion-avatar slot="start">
+                  <img src="assets/img/user.png">
+              </ion-avatar>
+              <ion-text> <h1> {{ user.id }}</h1></ion-text>
+              <ion-text slot="end"> <h1> Rol: {{ user.rol }}</h1></ion-text>               
           </ion-item>
           <ion-item-options side="end">
               <ion-item-option color="danger" (click)="delete(user)">

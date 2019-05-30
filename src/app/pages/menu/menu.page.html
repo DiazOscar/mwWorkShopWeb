@@ -20,7 +20,11 @@
       <ion-list class="list">
         <ion-item-sliding *ngFor="let inc of damages">
         <ion-item (click)="goDamage(inc)">
-            <ion-text> <h1>Averia {{ inc.id }}</h1> Vehiculo: {{inc.car}} Fecha: {{inc.date}}</ion-text>           
+            <ion-avatar slot="start">
+                <img src="assets/img/questionnaire.png">
+              </ion-avatar>
+              <ion-text> <h1>Averia {{ inc.id }}</h1> Vehiculo: {{inc.car}} </ion-text>  
+              <ion-text slot="end">Fecha: {{inc.date}}</ion-text>
         </ion-item>
         <ion-item-options side="end">
             <ion-item-option (click)="deleteDamage(inc)" color="danger">
