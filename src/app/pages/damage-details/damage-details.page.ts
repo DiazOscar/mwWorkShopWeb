@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DamageService } from 'src/app/services/damage.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-damage-details',
@@ -8,11 +8,20 @@ import { DamageService } from 'src/app/services/damage.service';
 })
 export class DamageDetailsPage implements OnInit {
 
-  constructor(public damageService: DamageService) { }
+  data: any;
+
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.data = this.router.getCurrentNavigation().extras.state.incidence;
+        console.log(this.data);
+      }
+    });
+   }
 
   ngOnInit() {
 
-    console.log(this.damageService);
+    console.log();
   }
 
 }

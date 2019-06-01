@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DamagesService } from 'src/app/services/damages.service';
 import { DamageService } from 'src/app/services/damage.service';
-import { NavController } from '@ionic/angular';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -14,7 +14,7 @@ export class MenuPage implements OnInit {
 
   constructor(private damageFService: DamagesService,
      private damageService: DamageService,
-     private navCtrl: NavController) { }
+     private router: Router) { }
 
   ngOnInit() {
 
@@ -29,12 +29,13 @@ export class MenuPage implements OnInit {
   }
 
   goDamage(inc){
-    console.log(inc);
-    this.damageService.damage.id = inc.id;
-    this.damageService.damage.car = inc.car;
-    this.damageService.damage.date = inc.date;
+    let navigationExtras: NavigationExtras = {
+      state: {
+        incidence: inc
+      }
+    };
 
-    this.navCtrl.navigateForward((['/damage-details']));
+    this.router.navigate(['/damage-details'], navigationExtras);
   }
 
   deleteDamage(inc){
@@ -42,7 +43,16 @@ export class MenuPage implements OnInit {
   }
 
   goUsers(){
-    this.navCtrl.navigateForward((['/users']));
+    this.router.navigate(['/users']);
+  }
+
+  goBudget(inc){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        incidence: inc
+      }
+    };
+    this.router.navigate(['/budget'], navigationExtras);
   }
 
 }

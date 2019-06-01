@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Averia: {{data.id}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-title>Averias carroceria</ion-title>
+    </ion-list-header>
+    <ion-item *ngFor="let dam of details.damages">
+      <ion-label>dam</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+      <ion-list-header>
+        <ion-title>Averias internas</ion-title>
+      </ion-list-header>
+    <ion-item *ngFor="let dai of details.internDamages">
+      <ion-label>dai</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid>
+
+      <ion-row>
+        <ion-col class="border" size="6">
+          Descripcion
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          Precio
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          Unidades
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          Total
+        </ion-col>
+      </ion-row>
+  <ion-list>
+    <div *ngFor="let row of rows; let i = index;"  style="font-size:smaller">
+      <ion-row>
+        <ion-col class="border" size="6">
+          <ion-input [(ngModel)]="rows[i].desc"></ion-input>
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          <ion-input [(ngModel)]="rows[i].price"></ion-input>
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          <ion-input [(ngModel)]="rows[i].amount" (ionBlur)="total()"></ion-input>
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          <ion-label> {{row.price * row.amount}} </ion-label>          
+        </ion-col>
+        <ion-icon size="large" (click)="removeRow(row)" name="close-circle"></ion-icon> 
+      </ion-row>
+    </div>
+  </ion-list>
+    <ion-row>
+      <ion-col size="6">        
+      </ion-col>
+      <ion-col size="1.5">
+      </ion-col>
+      <ion-col class="border" size="1.5">
+        TOTAL sin iva
+      </ion-col>
+      <ion-col class="border" size="1.5">
+        {{totalF}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col size="6">          
+        </ion-col>
+        <ion-col size="1.5">
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          IVA
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          {{ivaF}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">          
+        </ion-col>
+        <ion-col size="1.5">
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          TOTAL
+        </ion-col>
+        <ion-col class="border" size="1.5">
+          {{totalIva}}
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+
+  <ion-button (click)="addRow()">Add</ion-button>
+
+
+</ion-content>
