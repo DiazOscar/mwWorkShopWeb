@@ -13,7 +13,7 @@ export class DamagesService {
   getAllIncidence() {
     return this.firestore.collection('damagesF').snapshotChanges();
   }
-  
+
   getIncidence(incidence){
     return this.firestore.collection('damagesF').doc(incidence.id).snapshotChanges();
   }
