@@ -1,29 +1,17 @@
-<ion-content text-center>
+<ion-content padding>
 
-    <div class="bg">
-      <div class="head" text-center>
-        <h1>G-Auto</h1>
-        <h5>Hazlo facil</h5>
-      </div>
-  
-      <div class="inputs">
-        <ion-item class="ion-item">
-          <ion-label class="ion-label" position="floating">Usuario</ion-label>
-          <ion-input class="ion-input" type="text" [(ngModel)]="mail"></ion-input>
-          <ion-icon name="md-person" slot="start"></ion-icon>
-        </ion-item>
-  
-        <ion-item class="ion-item">
-          <ion-label class="ion-label" position="floating">Contraseña</ion-label>
-          <ion-input class="ion-input" type="password" [(ngModel)]="password"></ion-input>
-          <ion-icon name="md-lock" slot="start"></ion-icon>
-        </ion-item>
-        <ion-button class="button" (click)="login()" fill="solid" expand="block">Acceder</ion-button>
-        <p>Olvidaste tu contraseña?<b>Pulsa aquí</b></p>
-        O
-        <div class="fb" text-center>
-            <ion-icon name="log-in" text-center></ion-icon>Para registrarte <a href=""> Pulsa aqui!! </a>
-        </div>
-      </div>
-    </div>
+    <img class="icon" src="assets/img/charging-station.png"/>
+  <ion-list class="prueba">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input type="text" [(ngModel)]="mail"></ion-input>  
+    </ion-item>
+
+    <ion-item >
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>  
+      </ion-item>
+  </ion-list>
+      <ion-button class="prueba" fill="solid" expand="block" color="dark" (click)="login()">Acceder</ion-button>
+      <p class="text-center"> No estas registrado? <a href="/register">Registrate</a></p>
 </ion-content>
