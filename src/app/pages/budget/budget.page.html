@@ -11,7 +11,7 @@
       <ion-title>Averias carroceria</ion-title>
     </ion-list-header>
     <ion-item *ngFor="let dam of details.damages">
-      <ion-label>dam</ion-label>
+      <ion-label>{{dam}}</ion-label>
     </ion-item>
   </ion-list>
 
@@ -20,7 +20,7 @@
         <ion-title>Averias internas</ion-title>
       </ion-list-header>
     <ion-item *ngFor="let dai of details.internDamages">
-      <ion-label>dai</ion-label>
+      <ion-label>{{dai}}</ion-label>
     </ion-item>
   </ion-list>
 
@@ -99,7 +99,9 @@
       </ion-row>
   </ion-grid>
 
-  <ion-button (click)="addRow()">Add</ion-button>
+  <ion-button (click)="addRow()">
+    <ion-icon name="add"></ion-icon>
+  </ion-button>
 
 
 </ion-content>
