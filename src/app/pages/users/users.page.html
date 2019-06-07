@@ -1,6 +1,12 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>users</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Usuarios</ion-title>
+    <ion-buttons slot="end">
+        <ion-button (click)="back()" fill="solid"  style="height: 45px; border: 2px #000 solid;">
+          <img src="../../../assets/img/return.png" />
+          <ion-label color="dark" style="font-size: 26px">Volver</ion-label>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -17,7 +23,7 @@
                   <img src="assets/img/user.png">
               </ion-avatar>
               <ion-text> <h1> {{ user.id }}</h1></ion-text>
-              <ion-text slot="end"> <h1> Rol: {{ user.rol }}</h1></ion-text>               
+              <ion-text slot="end"> <h1>{{ user.rol }}</h1></ion-text>               
           </ion-item>
           <ion-item-options side="end">
               <ion-item-option color="danger" (click)="delete(user)">
@@ -36,7 +42,10 @@
   <ion-footer no-border >
     <ion-toolbar color="medium" padding>
       <ion-buttons>
-        <ion-button (click)="goRegister()" fill="solid">Registrar</ion-button>
+        <ion-button (click)="goRegister()" fill="solid"  style="height: 45px; border: 2px #000 solid;">
+          <img src="../../../assets/img/add-user.png" />
+          <ion-label color="dark" style="font-size: 26px">Registrar</ion-label>
+        </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-footer>

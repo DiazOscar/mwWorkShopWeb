@@ -25,13 +25,17 @@ export class BudgetPage implements OnInit {
         console.log(this.data);
       }
     });
-  }
 
-  ngOnInit() {
-    this.detailsService.getDetail(this.data.id).subscribe((det) =>{
+    setTimeout(() => {
+      this.detailsService.getDetail(this.data.id).subscribe((det) =>{
       this.details = det.payload.data()
       console.log(this.details);
    });
+    }, 350);
+    
+  }
+
+  ngOnInit() {
   }
 
   addRow() {

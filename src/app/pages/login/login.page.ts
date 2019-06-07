@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AngularFireAuth} from "@angular/fire/auth"
+import { AngularFireAuth } from "@angular/fire/auth"
 import { ToastController, NavController } from '@ionic/angular';
 
 @Component({
@@ -17,24 +17,30 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  async login(){
+  async login() {
     const { mail, password } = this
-    try{
+    try {
       return new Promise((resolve, rejected) => {
         console.log(mail);
-        this.afAuth.auth.signInWithEmailAndPassword(mail, password).then(user=>{
-                resolve(user)
-                this.navCtrl.navigateForward(['/menu']);
-              }).catch(err => rejected(err))
-      });  
-    }catch(err){
-      console.dir(err);
-      const toast = await this.toastCtrl.create({
-        message: err + "sorry",
-        duration: 2000
-      });
+        this.afAuth.auth.signInWithEmailAndPassword(mail, password).then(user => {
+          resolve(user)
+          this.navCtrl.navigateForward(['/menu']);
+        }).catch(async err => {
+          console.dir(err);
+          const toast = await this.toastCtrl.create({
+            message: err+"",
+            color: "light",
+            duration: 2000,
+            mode: "ios",
+            cssClass: "toastcss",
+          });
 
-      toast.present();
+          toast.present();
+        }
+        )
+      });
+    } catch (err) {
+
     }
   }
 }

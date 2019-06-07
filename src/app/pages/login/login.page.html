@@ -1,17 +1,41 @@
-<ion-content padding>
+<ion-content padding class="fondo">
 
-    <img class="icon" src="assets/img/charging-station.png"/>
-  <ion-list class="prueba">
-    <ion-item>
-      <ion-label position="floating">Usuario</ion-label>
-      <ion-input type="text" [(ngModel)]="mail"></ion-input>  
-    </ion-item>
+  <ion-grid style="height: 95%">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-card id="login-card" class="ion-padding">
 
-    <ion-item >
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="password"></ion-input>  
-      </ion-item>
-  </ion-list>
-      <ion-button class="prueba" fill="solid" expand="block" color="dark" (click)="login()">Acceder</ion-button>
-      <p class="text-center"> No estas registrado? <a href="/register">Registrate</a></p>
+          <img class="icon" src="assets/img/logo-menu.png" />
+        
+  
+        <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
+          <ion-icon name="mail" padding color="dark"></ion-icon>
+          <ion-input type="email" name="email" [(ngModel)]="mail" color="dark" placeholder="Email"></ion-input>
+        </ion-item>
+  
+        <ion-item style="margin-bottom: 20px; border: 2px #000 solid" color="primary">
+          <ion-icon name="lock" padding color="dark"></ion-icon>
+          <ion-input type="password" name="password" [(ngModel)]="password" color="dark" placeholder="Contrasenia"></ion-input>
+        </ion-item>
+  
+  
+        <div padding>
+          <ion-button color="primary" expand="block" size="large" (click)="login()">
+            <ion-icon name="md-checkmark-circle-outline" padding size="large"></ion-icon>
+            <ion-label size="large">Entrar</ion-label>
+          </ion-button>
+        </div>
+  
+  
+      </ion-card>
+  
+    </ion-row>
+    <div text-center>
+      <ion-label
+        style="font-size: 28px; color: beige; font-family: Georgia, 'Times New Roman', Times, serif; padding-bottom: 20 px;">
+        ODDM WorkShop ©
+      </ion-label>
+  
+    </div>
+  </ion-grid>
+  
 </ion-content>

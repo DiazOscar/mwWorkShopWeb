@@ -13,19 +13,20 @@ export class MenuPage implements OnInit {
   public damages;
 
   constructor(private damageFService: DamagesService,
-     private damageService: DamageService,
-     private router: Router) { }
+     private router: Router) { 
+      this.damageFService.getAllIncidence().subscribe(data => {
+        this.damages = data.map(e => {
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data()
+          };
+        })
+      });
+     }
 
   ngOnInit() {
 
-    this.damageFService.getAllIncidence().subscribe(data => {
-      this.damages = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        };
-      })
-    });
+    
   }
 
   goDamage(inc){
@@ -36,6 +37,7 @@ export class MenuPage implements OnInit {
     };
 
     this.router.navigate(['/damage-details'], navigationExtras);
+    console.log(navigationExtras);
   }
 
   deleteDamage(inc){

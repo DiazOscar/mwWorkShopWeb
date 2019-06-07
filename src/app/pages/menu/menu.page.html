@@ -1,50 +1,54 @@
 <ion-header no-border>
-  <ion-toolbar color="secondary" no-border>
-    <ion-title text-center>MENU</ion-title>
-    <ion-buttons slot="end">
-      <ion-button fill="solid" (click)="goUsers()">
-          <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
-          <ion-label>Usuarios</ion-label>
-      </ion-button>
-    </ion-buttons>
+  <ion-toolbar color="primary" no-border>
+    <ion-title text-center>
+      <h1 class="titulo">MENU</h1>
+    </ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding color="medium">
 
-<div class="backgroundwhite">
-    <ion-header color="secondary">
-      <ion-card-title>AVERIAS</ion-card-title>
-    </ion-header>     
-      <ion-list class="list">
-        <ion-item-sliding *ngFor="let inc of damages">
-            <ion-item>
-              <ion-text> <h1>Averia {{ inc.id }}</h1> Vehiculo: {{inc.car}} Fecha: {{inc.date}}</ion-text>   
-              <ion-buttons slot="end" >
-                <ion-button (click)="goDamage(inc)">
-                  <ion-icon name="eye" color="primary" size="large"></ion-icon> 
-                </ion-button>
-                <ion-button (click)="goBudget(inc)">
-                  <ion-icon name="document" color="primary" size="large"></ion-icon> 
-                </ion-button>
-              </ion-buttons>
-                   
-               
-            </ion-item>
-            
-            <ion-item-options side="end">
-            <ion-item-option (click)="deleteDamage(inc)" color="danger">
-              <ion-icon name="trash" slot="icon-only"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
-        
-      </ion-item-sliding>      
-      <ion-item *ngIf="damages.length == 0">
-        <ion-text>No hay partes abiertos</ion-text>
+  <ion-list class="list" text-center>
+    <ion-list-header color="primary"> 
+      <ion-title>AVERIAS</ion-title>
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let inc of damages">
+      <ion-item>
+        <ion-text>          
+          <h1><ion-icon name="car" color="primary"></ion-icon> {{ inc.id }} - {{inc.car}} - {{inc.date}}</h1>
+        </ion-text>
+        <ion-buttons slot="end">
+          <ion-button (click)="goDamage(inc)">
+            <ion-icon name="eye" color="primary" size="large"></ion-icon>
+          </ion-button>
+          <ion-button (click)="goBudget(inc)">
+            <ion-icon name="document" color="primary" size="large"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option (click)="deleteDamage(inc)" color="danger">
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+    <ion-item *ngIf="damages.length == 0">
+      <ion-text>No hay partes abiertos</ion-text>
     </ion-item>
 
-      </ion-list>
-  </div>
+  </ion-list>
 </ion-content>
-
+<ion-footer no-border>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="end" padding>
+        <ion-button fill="solid" (click)="goUsers()" style="height: 45px; border: 2px #000 solid;">
+          <img src="../../../assets/img/friends.png" />
+          <ion-label style="font-size: 26px" color="dark">Usuarios</ion-label>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

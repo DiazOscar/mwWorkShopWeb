@@ -1,6 +1,5 @@
-.text-center {
-    text-align: center;
-
+.text-center {	
+    text-align: center
 }
 
 .icon{
@@ -14,3 +13,37 @@
     margin-left: 10%;
     margin-right: 10%;
 }
+
+.toastcss {
+    background-color:#32db64!important;
+    font-weight: bold;
+    position: absolute;
+    top: 446px !important;
+    text-align: center !important;
+    border-radius: 30px !important;
+    width: 50% !important;
+}
+
+ion-content{
+    --background: #fff url('../../../assets/img/WorkshopBG.jpg') no-repeat center center / cover;
+}
+ion-input {
+    --background: #fff;
+    border: 2px #000 solid;
+    border-radius: 20px;
+    padding-left: 20px !important;
+    font-size: 20px;
+}
+
+ion-card{
+    opacity: 1 !important;
+    display: flex;
+    flex-direction: column;
+    width: 50% !important;
+    margin: 0 !important;
+  }
+
+  ion-button {
+    border: 2px #000 solid;
+    border-radius: 500px;
+  }

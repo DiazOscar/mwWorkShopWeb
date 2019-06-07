@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { NavController, AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -13,7 +14,7 @@ export class UsersPage implements OnInit {
   users = [];
   
   constructor(private userService: UsersService,
-    private navCtrl:NavController,
+    private router: Router,
     public alertCtrl: AlertController,
     public afAuth: AngularFireAuth) { }
   
@@ -31,7 +32,7 @@ export class UsersPage implements OnInit {
   }
 
   goRegister(){
-    this.navCtrl.navigateForward(['/register']);
+    this.router.navigate(['/register']);
   }
 
   async delete(user){
@@ -72,6 +73,10 @@ export class UsersPage implements OnInit {
     });
 
     await input.present();
+  }
+
+  back(){
+    this.router.navigate(["/menu"]);
   }
   
 

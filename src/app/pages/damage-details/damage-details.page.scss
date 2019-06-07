@@ -1,0 +1,44 @@
+.titulo {
+    font-size: 40px;
+    text-decoration: underline;
+  }
+
+  canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  .summary{
+    max-height: 38%;
+    overflow-y: scroll;
+  }
+
+  .backgroundwhite {
+    background-color: white;
+    height: 95%;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 25px;
+  }
+
+  .titlewhite {
+    font-family: 'Signika', sans-serif;
+    background-color: white;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 25px;
+  }
+  
+  .sub{
+    font-size: 18px;
+  }
+
+  .btns {
+    margin: 0px;
+  }
+  
