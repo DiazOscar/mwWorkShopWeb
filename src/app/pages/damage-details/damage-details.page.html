@@ -26,9 +26,11 @@
         </ion-header>
         
         <ion-list class="summary">
-          <ion-item>
-            <h3>Carroceria</h3>
-          </ion-item>
+            <ion-card-header>
+                <ion-card-title>
+                  <h1 text-center>AVERIAS CARROCERIA</h1>
+                </ion-card-title>
+              </ion-card-header>
           <ion-item *ngFor="let av of this.details.damages; let i = index;">
             <ion-text>{{i + 1 }} - {{av}}</ion-text>
           </ion-item>

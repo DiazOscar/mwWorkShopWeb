@@ -1,13 +1,6 @@
-
-
-.list{
-    max-height: 100%;
-    text-align: center !important;
-  }
-
-  .backgroundwhite {
+.backgroundwhite {
     background-color: white;
-    height: 80%;
+
     margin-top: 10px;
     margin-bottom: 0px;
     border: 2px solid black;
@@ -15,9 +8,14 @@
     border-radius: 25px;
   }
 
- .titulo { color: #fff; font-family: 'Righteous',
+.ionbutton{
+    --border-width: 50px;
+  }
+
+.titulo { color: #fff; font-family: 'Righteous',
    cursive; font-size: 40px; font-weight: normal; 
    line-height: 60px; margin: 10px 0 20px; 
    text-transform: uppercase; text-shadow: 2px 2px 0 #000;
     margin: 10px 0 24px; 
-    text-align: center;  }
+    text-align: center;  
+}

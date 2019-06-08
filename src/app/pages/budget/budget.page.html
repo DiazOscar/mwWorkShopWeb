@@ -1,15 +1,19 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Averia: {{data.id}}</ion-title>
+
+    <ion-avatar slot="end">
+      
+    </ion-avatar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="medium" padding >
 
+  <ion-toolbar color="primary">
+    <ion-title text-center>Averias carroceria</ion-title>
+  </ion-toolbar>  
   <ion-list>
-    <ion-list-header>
-      <ion-title>Averias carroceria</ion-title>
-    </ion-list-header>
     <ion-item *ngFor="let dam of details.damages">
       <ion-label>{{dam}}</ion-label>
     </ion-item>

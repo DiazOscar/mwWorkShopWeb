@@ -1,19 +1,24 @@
-<ion-header no-border>
-  <ion-toolbar color="primary" no-border>
+<ion-header >
+  <ion-toolbar color="primary" >
+      
     <ion-title text-center>
       <h1 class="titulo">MENU</h1>
     </ion-title>
-    
+    <ion-buttons slot="start">
+          <ion-icon name="exit" style="font-size: 70px;"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 
+
+
 <ion-content padding color="medium">
 
-  <ion-list class="list" text-center>
-    <ion-list-header color="primary"> 
-      <ion-title>AVERIAS</ion-title>
-    </ion-list-header>
+<ion-toolbar color="primary">
+    <ion-title text-center >AVERIAS</ion-title>
+  </ion-toolbar>
+
     <ion-item-sliding *ngFor="let inc of damages">
       <ion-item>
         <ion-text>          
@@ -40,7 +45,6 @@
       <ion-text>No hay partes abiertos</ion-text>
     </ion-item>
 
-  </ion-list>
 </ion-content>
 <ion-footer no-border>
   <ion-toolbar color="medium">
