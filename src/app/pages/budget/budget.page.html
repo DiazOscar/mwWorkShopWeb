@@ -1,123 +1,134 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Averia: {{data.id}}</ion-title>
+    <ion-title text-center>Averia: {{data.id}}</ion-title>
 
-    <ion-avatar slot="end">
-      
-    </ion-avatar>
+    <ion-buttons slot="start">
+      <ion-button fill="solid">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Volver
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button fill="solid">
+        <ion-icon name="document" color="primary" size="large"></ion-icon>
+        PDF
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="medium" padding >
-<ion-row>
-  <ion-col>
-    <ion-toolbar color="primary">
-    <ion-title text-center>Averias carroceria</ion-title>
-  </ion-toolbar>  
-  <ion-list>
-    <ion-item *ngFor="let dam of details.damages">
-      <ion-label>{{dam}}</ion-label>
-    </ion-item>
-  </ion-list>
-  </ion-col>
-
-  <ion-col>
+<ion-content color="medium" padding>
+  <ion-row>
+    <ion-col>
       <ion-toolbar color="primary">
-          <ion-title text-center>Averias internas</ion-title>
-        </ion-toolbar>  
-    <ion-list>
-    <ion-item *ngFor="let dai of details.internDamages">
-      <ion-label>{{dai}}</ion-label>
-    </ion-item>
-  </ion-list>
-  </ion-col>
-</ion-row>
-  
+        <ion-title text-center>Averias carroceria</ion-title>
+      </ion-toolbar>
+      <ion-list>
+        <ion-item *ngFor="let dam of details.damages">
+          <ion-label>{{dam}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-col>
 
-  
+    <ion-col>
+      <ion-toolbar color="primary">
+        <ion-title text-center>Averias internas</ion-title>
+      </ion-toolbar>
+      <ion-list>
+        <ion-item *ngFor="let dai of details.internDamages">
+          <ion-label>{{dai}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 
-  <ion-grid class="grid">
 
-      <ion-row>
-        <ion-col class="border" size="6">
-          <ion-label color="dark">Descripcion</ion-label>
-        </ion-col>
-        <ion-col class="border" size="1.5">
-          <ion-label color="dark">Precio</ion-label>
-        </ion-col>
-        <ion-col class="border" size="1.5">
-          <ion-label color="dark">Unidades</ion-label>
-        </ion-col>
-        <ion-col class="border" size="1.5">
-          <ion-label color="dark">Total</ion-label>
-        </ion-col>
-      </ion-row>
-  <ion-list>
-    <div *ngFor="let row of rows; let i = index;"  style="font-size:smaller">
-      <ion-row>
-        <ion-col class="border" size="6">
-          <div>
-          <ion-input [(ngModel)]="rows[i].desc" ></ion-input>
-          </div>
-        </ion-col>
-        <ion-col class="border" size="1.5">
-          <div>
-            <ion-input [(ngModel)]="rows[i].price"></ion-input>
-          </div>
-        </ion-col>
-        <ion-col class="border" size="1.5">
-          <div>
-            <ion-input [(ngModel)]="rows[i].amount" (ionBlur)="total()"></ion-input>
-          </div>
-        </ion-col>
-        <ion-col class="border" size="1.5">
-          <div>            
-          <ion-label color="dark"> {{row.price * row.amount}} </ion-label>   
-          </div>       
-        </ion-col>
-        <ion-icon size="large" (click)="removeRow(i)" name="close-circle" color="dark"></ion-icon> 
-      </ion-row>
-    </div>
-  </ion-list>
+
+
+  <ion-grid class="blanco">
 
     <ion-row>
-      <ion-col size="6">        
+      <ion-col class="border" size="7.5">
+        <ion-label color="dark">Descripcion</ion-label>
+      </ion-col>
+      <ion-col class="border" size="1.5">
+        <ion-label color="dark">Precio</ion-label>
+      </ion-col>
+      <ion-col class="border" size="1.5">
+        <ion-label color="dark">Unidades</ion-label>
+      </ion-col>
+      <ion-col class="border" size="1.5">
+        <ion-label color="dark">Total</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-list>
+      <div *ngFor="let row of rows; let i = index;" style="font-size:smaller">
+        <ion-row>
+          <ion-col class="border" size="7.5">
+            <div>
+              <ion-input [(ngModel)]="rows[i].desc"></ion-input>
+            </div>
+          </ion-col>
+          <ion-col class="border" size="1.5">
+            <div>
+              <ion-input [(ngModel)]="rows[i].price"></ion-input>
+            </div>
+          </ion-col>
+          <ion-col class="border" size="1.5">
+            <div>
+              <ion-input [(ngModel)]="rows[i].amount" (ionBlur)="total()"></ion-input>
+            </div>
+          </ion-col>
+          <ion-col class="border" size="1.5">
+            <div>
+              <ion-label color="dark"> {{row.price * row.amount}} </ion-label>
+            </div>
+          </ion-col>
+          <ion-icon size="large" (click)="removeRow(i)" name="close-circle" color="dark"></ion-icon>
+        </ion-row>
+      </div>
+    </ion-list>
+
+    <ion-row>
+      <ion-col size="7.5">
       </ion-col>
       <ion-col size="1.5">
       </ion-col>
       <ion-col class="border" size="1.5">
-          <ion-label color="dark">TOTAL SIN IVA</ion-label>
+        <ion-label color="dark">TOTAL SIN IVA</ion-label>
       </ion-col>
       <ion-col class="border" size="1.5">
-          <ion-label color="dark">{{totalF}}</ion-label>  
+        <ion-label color="dark">{{totalF}}</ion-label>
       </ion-col>
     </ion-row>
 
     <ion-row color="dark">
-        <ion-col size="6">          
-        </ion-col>
-        <ion-col size="1.5">
-        </ion-col>
-        <ion-col class="border" size="1.5">
-          <ion-label color="dark">IVA</ion-label>         
-        </ion-col>
-        <ion-col class="border" size="1.5">
-          <ion-label color="dark">{{ivaF}}</ion-label>
-        </ion-col>
-      </ion-row>
+      <ion-col size="7.5">
+      </ion-col>
+      <ion-col size="1.5">
+      </ion-col>
+      <ion-col class="border" size="1.5">
+        <ion-label color="dark">IVA</ion-label>
+      </ion-col>
+      <ion-col class="border" size="1.5">
+        <ion-label color="dark">{{ivaF}}</ion-label>
+      </ion-col>
+    </ion-row>
 
-      <ion-row>
-        <ion-col size="6">          
-        </ion-col>
-        <ion-col size="1.5">
-        </ion-col>
-        <ion-col class="border" size="1.5">
-         <ion-label color="dark">TOTAL</ion-label> 
-        </ion-col>
-        <ion-col class="border" size="1.5">
-            <ion-label color="dark">{{totalIva}}</ion-label> 
-        </ion-col>
-      </ion-row>
+    <ion-row>
+      <ion-col size="7.5">
+      </ion-col>
+      <ion-col size="1.5">
+      </ion-col>
+      <ion-col class="border" size="1.5">
+        <ion-label color="dark">TOTAL</ion-label>
+      </ion-col>
+      <ion-col class="border" size="1.5">
+        <ion-label color="dark">{{totalIva}}</ion-label>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
   <ion-button (click)="addRow()">

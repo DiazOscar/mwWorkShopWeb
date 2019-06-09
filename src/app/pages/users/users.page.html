@@ -1,60 +1,53 @@
 <ion-header>
   <ion-toolbar color="primary" style="height: 100px">
-      <ion-avatar style="width: 45px; height: 45px;margin-left: auto;margin-right: auto" >
-          <img src="assets/img/user.png">
-      </ion-avatar>
-      <ion-title text-center style="margin-top: 1%">Usuario: Daniel Moreno</ion-title>
+    <ion-avatar style="width: 45px; height: 45px;margin-left: auto;margin-right: auto">
+      <img src="assets/img/user.png">
+    </ion-avatar>
+    <ion-title text-center style="margin-top: 1%">Usuario: Daniel Moreno</ion-title>
 
-      <ion-buttons slot="end" style="margin-top: 2%;margin-right: 2%">
-        <ion-button (click)="goRegister()" fill="solid"  style="height: 45px; border: 2px #000 solid;">
-          <img src="../../../assets/img/add-user.png" />
-          <ion-label color="dark" style="font-size: 26px">Registrar</ion-label>
-        </ion-button>
-      </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" fill="solid">
+        <ion-icon name="arrow-round-back" color="primary"></ion-icon>
+        Volver
+      </ion-button>
+    </ion-buttons>
 
-    <ion-buttons slot="start" style="margin-top: 2%;margin-left: 2%">
-        <ion-button (click)="back()" fill="solid"  style="height: 45px; border: 2px #000 solid;">
-          <img src="../../../assets/img/return.png" />
-          <ion-label color="dark" style="font-size: 26px">Volver</ion-label>
-        </ion-button>
-      </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goRegister()" fill="solid">
+        <ion-icon name="person" color="primary"></ion-icon>
+        Registrar
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding color="medium">
 
   <ion-toolbar color="primary">
-    <ion-title  class="list" text-center>USUARIOS</ion-title>
-  </ion-toolbar>   
-  
+    <ion-title class="list" text-center>USUARIOS</ion-title>
+  </ion-toolbar>
+
   <ion-item-sliding *ngFor="let user of users">
     <ion-item>
-        <ion-avatar slot="start">
-            <img src="assets/img/user.png">
-        </ion-avatar>
-        <ion-text> <h1> {{ user.id }}</h1></ion-text>
-        <ion-text slot="end"> <h1>{{ user.rol }}</h1></ion-text>               
+      <ion-avatar slot="start">
+        <img src="assets/img/user.png">
+      </ion-avatar>
+      <ion-text>
+        <h1> {{ user.id }}</h1>
+      </ion-text>
+      <ion-text slot="end">
+        <h1>{{ user.rol }}</h1>
+      </ion-text>
     </ion-item>
     <ion-item-options side="end">
       <ion-item-option color="danger" (click)="delete(user)">
         <ion-icon name="trash" slot="icon-only"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-      </ion-item-sliding> 
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
 
-    <ion-item *ngIf="users.length == 0">
-      <ion-text>No hay usuarios</ion-text>
-    </ion-item>
+  <ion-item *ngIf="users.length == 0">
+    <ion-text>No hay usuarios</ion-text>
+  </ion-item>
 
-  </ion-content>
-
-  <ion-footer no-border >
-    <ion-toolbar color="medium" padding>
-      <ion-buttons>
-        <ion-button (click)="goRegister()" fill="solid"  style="height: 45px; border: 2px #000 solid;">
-          <img src="../../../assets/img/add-user.png" />
-          <ion-label color="dark" style="font-size: 26px">Registrar</ion-label>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-footer>
+</ion-content>

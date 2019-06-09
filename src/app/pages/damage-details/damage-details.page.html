@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title text-center>Detalles de la reparacion</ion-title>
-    <ion-buttons slot="end"> 
+    <ion-buttons slot="start"> 
       <ion-button fill="solid" (click)="comeback()">
+        <ion-icon name="arrow-round-back"></ion-icon>
         Volver
       </ion-button>
     </ion-buttons>
@@ -52,3 +53,11 @@
   </ion-row> 
 
 </ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar color="medium">
+      <ion-button color="medium">
+          <ion-icon name="document" color="primary" size="large"></ion-icon>
+        </ion-button>
+  </ion-toolbar>
+</ion-footer>
