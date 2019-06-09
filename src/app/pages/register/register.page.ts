@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,10 @@ export class RegisterPage implements OnInit {
   mail: string = "";
   rol: string = "";
 
-  constructor(public afAuth: AngularFireAuth, private userService: UsersService, public toastCtrl: ToastController) { }
+  constructor(public afAuth: AngularFireAuth,
+    private userService: UsersService,
+    public toastCtrl: ToastController, 
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -33,9 +37,12 @@ export class RegisterPage implements OnInit {
     if(password !== cpassword){
       return console.log("password don't match");
     }
+    
     try{
       this.userService.createUser(profile);
       const res = await this.afAuth.auth.createUserWithEmailAndPassword(mail, password);
+
+      this.router.navigate(["/users"]);
     }catch(err){
       console.log(err);
     }

@@ -57,7 +57,7 @@ export class DamageDetailsPage implements OnInit {
 
    this.canvasElement = this.canvas.nativeElement;
    this.setBackgroundImage();
-   this.canvasElement.width = document.body.clientWidth*3/ 5;
+   this.canvasElement.width = document.body.clientWidth*8/ 20 ;
    this.canvasElement.height = (document.body.clientHeight*4)/12;
    this.ctx = this.canvasElement.getContext('2d');
 
@@ -83,7 +83,7 @@ export class DamageDetailsPage implements OnInit {
     background.src = this.data.imagePath;
 
     background.onload = function(){
-      context.drawImage(background,0,0, document.body.clientWidth*3/5, (document.body.clientHeight*4)/12);   
+      context.drawImage(background,0,0, document.body.clientWidth*8/20, (document.body.clientHeight*4)/12);   
     }
   }
 

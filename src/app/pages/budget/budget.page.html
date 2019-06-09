@@ -9,8 +9,9 @@
 </ion-header>
 
 <ion-content color="medium" padding >
-
-  <ion-toolbar color="primary">
+<ion-row>
+  <ion-col>
+    <ion-toolbar color="primary">
     <ion-title text-center>Averias carroceria</ion-title>
   </ion-toolbar>  
   <ion-list>
@@ -18,15 +19,22 @@
       <ion-label>{{dam}}</ion-label>
     </ion-item>
   </ion-list>
+  </ion-col>
 
-  <ion-list>
-      <ion-list-header>
-        <ion-title>Averias internas</ion-title>
-      </ion-list-header>
+  <ion-col>
+      <ion-toolbar color="primary">
+          <ion-title text-center>Averias internas</ion-title>
+        </ion-toolbar>  
+    <ion-list>
     <ion-item *ngFor="let dai of details.internDamages">
       <ion-label>{{dai}}</ion-label>
     </ion-item>
   </ion-list>
+  </ion-col>
+</ion-row>
+  
+
+  
 
   <ion-grid class="grid">
 
@@ -67,7 +75,7 @@
           <ion-label color="dark"> {{row.price * row.amount}} </ion-label>   
           </div>       
         </ion-col>
-        <ion-icon size="large" (click)="removeRow(i)" name="close-circle"></ion-icon> 
+        <ion-icon size="large" (click)="removeRow(i)" name="close-circle" color="dark"></ion-icon> 
       </ion-row>
     </div>
   </ion-list>

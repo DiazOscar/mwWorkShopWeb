@@ -1,46 +1,54 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Registrar Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding color="medium">
 
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">Usuario</ion-label>
-        <ion-input type="text" [(ngModel)]="user"></ion-input>  
-      </ion-item>
+  <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
+    <ion-icon name="person" padding color="dark"></ion-icon>
+    <ion-input type="text" name="user" [(ngModel)]="user" color="dark" placeholder="Usuario"></ion-input>
+  </ion-item>
 
-      <ion-item>
-        <ion-select [(ngModel)]="rol">
-          <ion-select-option value="mecanico">Mecanico</ion-select-option>
-          <ion-select-option value="oficina">T. Oficina</ion-select-option>
-        </ion-select>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="text" [(ngModel)]="mail"></ion-input>  
-      </ion-item> 
-  
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="password"></ion-input>  
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Repetir Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="cpassword"></ion-input>  
-      </ion-item>
-    </ion-list>
-  
+  <ion-radio-group [(ngModel)]="rol">
     <ion-row>
-      <ion-col size="4"></ion-col>
-      <ion-col size="4">
-        <ion-button fill="solid" expand="block" color="dark" (click)="register()">Acceder</ion-button>
+      <ion-col>
+        <ion-item style=" border: 2px #000 solid" color="primary">
+          <ion-radio value="mecanico" checked color="dark"></ion-radio>
+          <ion-label>Mecanico</ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item style=" border: 2px #000 solid" color="primary">
+          <ion-radio value="oficina" color="dark"></ion-radio>
+          <ion-label>Oficina</ion-label>
+        </ion-item>
       </ion-col>
     </ion-row>
-  
-  </ion-content>
-  
+  </ion-radio-group>
+
+<ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
+    <ion-icon name="email" padding color="dark"></ion-icon>
+    <ion-input type="email" name="mail" [(ngModel)]="mail" color="dark" placeholder="Email"></ion-input>
+  </ion-item>
+
+  <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
+      <ion-icon name="person" padding color="dark"></ion-icon>
+      <ion-input type="text" name="password" [(ngModel)]="password" color="dark" placeholder="Contraseña"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
+        <ion-icon name="person" padding color="dark"></ion-icon>
+        <ion-input type="text" name="cpassword" [(ngModel)]="cpassword" color="dark" placeholder="Repetir Contraseña"></ion-input>
+      </ion-item>
+
+  <ion-row>
+    <ion-col size="4"></ion-col>
+    <ion-col size="4">
+      <ion-button fill="solid" expand="block" color="dark" (click)="register()">Registrar</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
