@@ -23,7 +23,6 @@ export class ViewPdfPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.exportPdf();
   }
 
   async exportPdf() {
