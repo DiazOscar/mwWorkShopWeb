@@ -1,0 +1,123 @@
+
+.flex{
+	display: flex;
+}
+.flex.column{
+	flex-direction: column;
+}
+.flex.center{
+	justify-content: center;
+	align-items: center;
+}
+.centrado{
+	text-align: center;
+}
+input.text{
+	border: none;
+	outline: none;
+	font-size: 10px;
+}
+input.strong{
+	font-weight: bold;
+}
+.width{
+	width: 100%;
+}
+
+*{
+	box-sizing: border-box;
+}
+/*
+h1{
+	font-size: 22px;
+}
+h4{
+	font-size: 12px;
+}
+*/
+
+.albaran{
+    /*Dimensiones de un A4*/
+    width: 595px; 
+    height: 730px;
+    background-color: white;
+	border: solid 2px black;
+    font-size: 10px;
+    overflow: visible;
+}
+.albaran .header .header-box >div{
+	margin: 3px;
+}
+
+
+.section{
+	margin: 3px;
+}
+
+
+.article{
+	border: solid 1px black;
+}
+.article .header{
+	background-color: lightgray;
+	border-bottom: solid 1px black;
+	font-size: 11px;
+	font-weight: bold;
+}
+.article .header h3{
+	padding: 1px;
+	margin: 0;
+}
+.article .content{
+	margin: 5px;
+	min-height: 50px;
+}
+.article .content label{
+	display: inline-block;
+	width: 55px;
+}
+.article .content .double-input{
+	margin: 0;
+	padding: 0;
+}
+.article .content input[type=text]{
+	display: inline-block;
+	width: 190px;
+}
+.article .content .double-input input[type=text]{
+	display: inline-block;
+	width: 75px;
+}
+.article .footer p{
+	font-weight: bold;
+	text-align: right;
+	font-size: 10px;
+	margin: 0 3px;
+}
+.article .footer.bordertop{
+	border-top: solid 1px black;
+}
+
+
+.anomalias{
+	margin: 0;
+}
+.anomalias .imagen{
+	height: 100px;
+	width: 100%;
+	border: solid 2px gray;
+}
+.anomalias>div{
+	margin: 5px;
+}
+
+
+
+.footer h1{
+	font-size: 15px;
+	margin: 2px;
+}
+.footer p{
+	margin: 0;
+	padding: 4px;
+}
