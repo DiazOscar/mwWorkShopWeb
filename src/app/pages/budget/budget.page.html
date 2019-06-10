@@ -1,7 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title text-center>Averia: {{data.id}}</ion-title>
-
     <ion-buttons slot="start">
       <ion-button fill="solid">
         <ion-icon name="arrow-round-back"></ion-icon>
@@ -10,12 +9,12 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button fill="solid">
+      <ion-button color="light">
         <ion-icon name="document" color="primary" size="large"></ion-icon>
         PDF
       </ion-button>
     </ion-buttons>
-
+    
   </ion-toolbar>
 </ion-header>
 
@@ -81,7 +80,7 @@
               <ion-input [(ngModel)]="rows[i].amount" (ionBlur)="total()"></ion-input>
             </div>
           </ion-col>
-          <ion-col class="border" size="1.5">
+          <ion-col class="border" size="1">
             <div>
               <ion-label color="dark"> {{row.price * row.amount}} </ion-label>
             </div>
