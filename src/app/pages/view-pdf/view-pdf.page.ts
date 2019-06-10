@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import domtoimage from 'dom-to-image';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-pdf',
@@ -9,19 +10,24 @@ import domtoimage from 'dom-to-image';
 })
 export class ViewPdfPage implements OnInit {
 
+  data: any;
+ 
+  constructor(private route: ActivatedRoute,
+    private router: Router) {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.data = this.router.getCurrentNavigation().extras.state.datos;
+        console.log(this.data);
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.exportPdf();
   }
-  
-  
-
-  loading: any;
-
-  constructor() {
-  }
 
   async exportPdf() {
-const div = document.getElementById("pdf");
+    const div = document.getElementById("pdf");
     const options = { background: "white", height: 845, width: 595 };
     domtoimage.toPng(div, options).then((dataUrl)=> {
         //Initialize JSPDF
@@ -31,11 +37,9 @@ const div = document.getElementById("pdf");
 
         doc.save("prueba.pdf");
 
-
     })
     .catch(function (error) {
-        this.loading.dismiss();
-        console.error('oops, something went wrong!', error);
+
     });
   }
 

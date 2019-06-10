@@ -54,7 +54,7 @@ export class DamageDetailsPage implements OnInit {
       this.vehicle = veh.payload.data()
       console.log(this.vehicle);
    });
-
+ 
    this.canvasElement = this.canvas.nativeElement;
    this.setBackgroundImage();
    this.canvasElement.width = document.body.clientWidth*8/ 20 ;
