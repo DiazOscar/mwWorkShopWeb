@@ -15,12 +15,14 @@ export class BudgetPage implements OnInit {
   vehicle: any;
   customer: any;
   details: any;
+  budget = {
+    rows: [],
 
-  rows = [];
-
-  ivaF: string;
-  totalF: string;
-  totalIva: string;
+    ivaF: '',
+    totalF: '',
+    totalIva: ''
+  }
+  
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -58,29 +60,29 @@ export class BudgetPage implements OnInit {
   }
 
   addRow() {
-    this.rows.push({desc: "",
+    this.budget.rows.push({desc: "",
                     amount: ""
                   })
-    console.log(this.rows);
+    console.log(this.budget.rows);
   }
 
   removeRow(row){
-    this.rows.splice(row, 1);
+    this.budget.rows.splice(row, 1);
     this.total();
   }
 
   total(){
     let iva: number = 0;
     let cant: number = 0;
-    for(let row of this.rows){
+    for(let row of this.budget.rows){
       console.log(row);
       cant += row.price * row.amount;
       iva += (row.price * row.amount) * 0.21;
     }
-    this.totalF = String(cant);
-    this.ivaF = String(Math.round(iva*100)/100);
-    this.totalIva = String(cant + iva);
-    console.log(this.totalF);
+    this.budget.totalF = String(cant.toFixed(2));
+    this.budget.ivaF = String((Math.round(iva*100)/100).toFixed(2));
+    this.budget.totalIva = String(cant + iva);
+    console.log(this.budget.totalF);
   }
 
   goPDF(){
@@ -89,7 +91,7 @@ export class BudgetPage implements OnInit {
       detalles: this.details,
       cliente: this.customer,
       vehiculo: this.vehicle,
-      budget: this.rows
+      budget: this.budget
     }
 
     let navigationExtras: NavigationExtras = {

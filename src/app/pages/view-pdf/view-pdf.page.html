@@ -8,7 +8,7 @@
         <div style="width:15%;" class="flex column">
           <label style="margin-bottom: 2px">TALLER:</label>
           <label style="margin-bottom: 2px">DIRECCION:</label>
-          <label style="margin-bottom: 2px" >TELEFONO:</label>
+          <label style="margin-bottom: 2px">TELEFONO:</label>
           <label style="margin-bottom: 2px">CIF:</label>
           <label style="margin-bottom: 2px">email:</label>
         </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-  <!--------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------->
     <div class="section flex">
       <div class="article" style="width:50%">
         <div class="header">
@@ -47,7 +47,7 @@
           <div class="double-input">
             <label>Modelo:</label> <label class="text strong">{{data.vehiculo.model}}</label>
             <label>Color:</label> <label class="text strong">{{data.vehiculo.color}}</label>
-          </div>              
+          </div>
           <div class="double-input">
             <label>Kilómetros:</label>
             <label class="text strong">{{data.vehiculo.kilometers}}</label>
@@ -64,29 +64,29 @@
           <label>Cliente:</label> <label class="text strong" style="width: 120px;">{{data.cliente.name}}</label><br>
           <label>NIF/CIF:</label> <label class="text strong">{{data.cliente.nif}}</label> <br>
           <label>Dirección:</label> <label class="text strong">{{data.cliente.address}}</label><br>
-          <label>Correo:</label> <label class="text strong" style="width: 120px;">{{data.cliente.email}}</label><br>              
-          <label>Telf:</label>  <label class="text strong">{{data.cliente.phone}}</label>
+          <label>Correo:</label> <label class="text strong" style="width: 120px;">{{data.cliente.email}}</label><br>
+          <label>Telf:</label> <label class="text strong">{{data.cliente.phone}}</label>
           <br>
         </div>
       </div>
     </div>
-  <!--------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------->
     <div class="section flex">
       <div class="article width">
         <div class="anomalias flex">
           <div style="width:30%;">
             <p class="centrado">Anomalías Observadas:</p>
             <div class="imagen">
-              <img src="{{data.averia.imagePath}}" alt="">
+              <img [src]="data.averia.imageB64" alt="">
             </div>
           </div>
-          <div style="width:50%;">
+          <div style="width:35%;">
             <p style="font-weight: bold">Reparacion Carroceria</p>
             <p *ngFor="let dam of data.detalles.damages; let i = index;">
               {{i+1}}. Ks{{dam}}
             </p>
           </div>
-          <div style="width:20%;">
+          <div style="width:35%;">
             <p style="font-weight: bold">Reparacion Interna</p>
             <p *ngFor="let dai of data.detalles.internDamages">
               {{dai}}
@@ -95,44 +95,86 @@
         </div>
       </div>
     </div>
-  <!--------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------->
     <div class="section flex">
-      <div class="article" style="width:70%">
+      <div class="article" style="width:61%">
         <div class="header">
           <h3 class="centrado" style="font-size:11px"><b>Servicios Solicitados</b></h3>
         </div>
-        <div class="content">
-          <p>REVISION</p>
-        </div>
-        <div class="footer">
-          <p>Total:</p>
+        <div class="budget">
+          <p *ngFor="let prep of data.budget.rows">- {{prep.desc}} KLK</p>
         </div>
       </div>
-      <div class="article" style="width:15%">
+      <div class="article" style="width:13%">
         <div class="header">
-          <h3 class="centrado" style="font-size:11px"><b>Mano Obra</b></h3>
+          <h3 class="centrado" style="font-size:11px"><b>Precio</b></h3>
         </div>
-        <div class="content">
-          
+        <div class="budget" style="text-align: right">
+        <p *ngFor="let prep of data.budget.rows">{{prep.price}}€</p>
         </div>
-        <div class="footer bordertop">
+        <!-- <div class="footer bordertop">
   
-        </div>
+        </div> -->
       </div>
-      <div class="article" style="width:15%">
+      <div class="article" style="width:13%">
         <div class="header">
-          <h3 class="centrado" style="font-size:11px"><b>Materiales</b></h3>
+          <h3 class="centrado" style="font-size:11px"><b>Cantidad</b></h3>
         </div>
-        <div class="content">
-          
+        <div class="budget" style="text-align: right">
+          <p *ngFor="let prep of data.budget.rows">{{prep.amount}}</p>          
         </div>
-        <div class="footer bordertop">
-  
+        <!-- <div class="footer bordertop">
+          <p>IVA</p>
+        </div> -->
+      </div>
+      <div class="article" style="width:13%">
+        <div class="header">
+          <h3 class="centrado" style="font-size:11px"><b>Total</b></h3>
         </div>
+        <div class="budget" style="text-align: right">
+          <p *ngFor="let prep of data.budget.rows">{{prep.price * prep.amount}}€</p>
+        </div>
+        <!-- <div class="footer bordertop">
+          {{ (data.budget.price * data.budget.amount) * 0.21 }}
+        </div> -->
       </div>
     </div>
-  <!--------------------------------------------------------------------------------------------->
-    <div class="section flex">
+
+    <div class=" flex">
+        <div style="width:61%">
+        </div>
+        <div style="width:13%">
+        </div>
+        <div class="article" style="width:13%">
+          <div class="foot" style="text-align: center; font-weight: bold;">
+            IVA
+          </div>
+        </div>
+        <div class="article" style="width:13%; margin-right: 3px;">
+          <div class="foot" style="text-align: right" >
+            {{data.budget.ivaF}}
+          </div>
+        </div>
+      </div>
+      <div class="flex">
+          <div style="width:61%">
+          </div>
+          <div style="width:13%">
+          </div>
+          <div class="article" style="width:13%">
+            <div class="foot" style="text-align: center; font-weight: bold;">
+              Total
+            </div>
+          </div>
+          <div class="article" style="width:13%; margin-right: 3px;">
+            <div class="foot" style="text-align: right">
+              {{data.budget.totalIva}}€
+            </div>
+          </div>
+        </div>
+
+    <!--------------------------------------------------------------------------------------------->
+    <!-- <div class="section flex">
       <div class="article width">
         <div class="header">
           <h3 class="centrado" style="font-size:11px"><b>Observaciones del Taller</b></h3>
@@ -141,11 +183,14 @@
           
         </div>
       </div>
-    </div>
-  <!--------------------------------------------------------------------------------------------->
-    <div class="footer flex column">
+    </div> -->
+    <!--------------------------------------------------------------------------------------------->
+    <div class="footer flex column" style="margin: 10px 0 0 0">
       <h1 class="centrado"><b>RENUNCIA A LA ELABORACIÓN DE PRESUPUESTO PREVIO</b></h1>
-      <p><b>EL CLIENTE TIENE DERECHO A LA ELABORACIÓN DE UN PRESUPUESTO PREVIO. MEDIANTE LA PRESENTE FIRMA, EL USUARIO RENUNCIA A LA ELABORACIÓN DE PRESUPUESTO PREVIO, Y AUTORIZA A REALIZAR LOS TRABAJOS NECESARIOS PARA LA REPARACIÓN DEL VEHÍCULO Y/O SERVICIOS SOLICITADOS CONFORME A LO REFLEJADO EN ESTE RESGUARDO DE DEPÓSITO</b></p>
+      <p><b>EL CLIENTE TIENE DERECHO A LA ELABORACIÓN DE UN PRESUPUESTO PREVIO. MEDIANTE LA PRESENTE FIRMA, EL USUARIO
+          RENUNCIA A LA ELABORACIÓN DE PRESUPUESTO PREVIO, Y AUTORIZA A REALIZAR LOS TRABAJOS NECESARIOS PARA LA
+          REPARACIÓN DEL VEHÍCULO Y/O SERVICIOS SOLICITADOS CONFORME A LO REFLEJADO EN ESTE RESGUARDO DE DEPÓSITO</b>
+      </p>
     </div>
   </div>
 </ion-content>
