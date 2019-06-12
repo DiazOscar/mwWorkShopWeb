@@ -1,201 +1,247 @@
-<ion-content>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title text-center>Vista PDF del documento</ion-title>
+    <ion-buttons slot="start">
+      <ion-button fill="solid" (click)="back()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Volver
+      </ion-button>
+    </ion-buttons>
 
-  <div class="albaran" id="pdf">
-    <div class="header flex column">
-      <h1 class="centrado" style="font-size:20px"><b>EJEMPLAR DE OBLIGADA ENTREGA AL CLIENTE</b></h1>
-      <h4 class="centrado" style="font-size:11px"><b>RESGUARDO DE DEPÓSITO SIN PRESUPUESTO</b></h4>
-      <div class="header-box flex">
-        <div style="width:15%;" class="flex column">
-          <label style="margin-bottom: 2px">TALLER:</label>
-          <label style="margin-bottom: 2px">DIRECCION:</label>
-          <label style="margin-bottom: 2px">TELEFONO:</label>
-          <label style="margin-bottom: 2px">CIF:</label>
-          <label style="margin-bottom: 2px">email:</label>
-        </div>
-        <div style="width:35%" class="flex column">
-          <input type="text" class="text width" value="ODDM Workshop">
-          <input type="text" class="text width" value="c/Virgen de las Flores 23, 29007-Malaga">
-          <input type="text" class="text width" value="Telf: 952 30 51 00">
-          <input type="text" class="text width" value="B92736602">
-          <input type="text" class="text width" value="oddmworkshop@gmail.com">
-        </div>
-        <div style="width:50%" class="flex column">
-          <label>RESGUARDO DE DEPÓSITO/ORDEN DE REPARACIÓN</label>
-          <br>
-          <div>
-            <label><b>NºOrden reparación:</b></label>
-            <label class="text strong">{{data.averia.id}}</label><br>
-            <label><b>Fecha:</b></label>
-            <label class="text strong">{{data.averia.date}}</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--------------------------------------------------------------------------------------------->
-    <div class="section flex">
-      <div class="article" style="width:50%">
-        <div class="header">
-          <h3 class="centrado" style="font-size:11px"><b>Vehiculo</b></h3>
-        </div>
-        <div class="content">
-          <div class="double-input">
-            <label>Matrícula:</label>
-            <label class="text strong">{{data.vehiculo.enrollment}}</label>
-            <label>Marca:</label>
-            <label class="text strong">{{data.vehiculo.brand}}</label>
-          </div>
-          <div class="double-input">
-            <label>Modelo:</label> <label class="text strong">{{data.vehiculo.model}}</label>
-            <label>Color:</label> <label class="text strong">{{data.vehiculo.color}}</label>
-          </div>
-          <div class="double-input">
-            <label>Kilómetros:</label>
-            <label class="text strong">{{data.vehiculo.kilometers}}</label>
-            <label>Matriculación:</label>
-            <label class="text strong">{{data.vehiculo.year}}</label>
-          </div>
-        </div>
-      </div>
-      <div class="article" style="width:50%">
-        <div class="header">
-          <h3 class="centrado" style="font-size:11px"><b>CLIENTE</b></h3>
-        </div>
-        <div class="content">
-          <label>Cliente:</label> <label class="text strong" style="width: 120px;">{{data.cliente.name}}</label><br>
-          <label>NIF/CIF:</label> <label class="text strong">{{data.cliente.nif}}</label> <br>
-          <label>Dirección:</label> <label class="text strong">{{data.cliente.address}}</label><br>
-          <label>Correo:</label> <label class="text strong" style="width: 120px;">{{data.cliente.email}}</label><br>
-          <label>Telf:</label> <label class="text strong">{{data.cliente.phone}}</label>
-          <br>
-        </div>
-      </div>
-    </div>
-    <!--------------------------------------------------------------------------------------------->
-    <div class="section flex">
-      <div class="article width">
-        <div class="anomalias flex">
-          <div style="width:30%;">
-            <p class="centrado">Anomalías Observadas:</p>
-            <div class="imagen">
-              <img [src]="data.averia.imageB64" alt="">
-            </div>
-          </div>
-          <div style="width:35%;">
-            <p style="font-weight: bold">Reparacion Carroceria</p>
-            <p *ngFor="let dam of data.detalles.damages; let i = index;">
-              {{i+1}}. Ks{{dam}}
-            </p>
-          </div>
-          <div style="width:35%;">
-            <p style="font-weight: bold">Reparacion Interna</p>
-            <p *ngFor="let dai of data.detalles.internDamages">
-              {{dai}}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--------------------------------------------------------------------------------------------->
-    <div class="section flex">
-      <div class="article" style="width:61%">
-        <div class="header">
-          <h3 class="centrado" style="font-size:11px"><b>Servicios Solicitados</b></h3>
-        </div>
-        <div class="budget">
-          <p *ngFor="let prep of data.budget.rows">- {{prep.desc}} KLK</p>
-        </div>
-      </div>
-      <div class="article" style="width:13%">
-        <div class="header">
-          <h3 class="centrado" style="font-size:11px"><b>Precio</b></h3>
-        </div>
-        <div class="budget" style="text-align: right">
-        <p *ngFor="let prep of data.budget.rows">{{prep.price}}€</p>
-        </div>
-        <!-- <div class="footer bordertop">
-  
-        </div> -->
-      </div>
-      <div class="article" style="width:13%">
-        <div class="header">
-          <h3 class="centrado" style="font-size:11px"><b>Cantidad</b></h3>
-        </div>
-        <div class="budget" style="text-align: right">
-          <p *ngFor="let prep of data.budget.rows">{{prep.amount}}</p>          
-        </div>
-        <!-- <div class="footer bordertop">
-          <p>IVA</p>
-        </div> -->
-      </div>
-      <div class="article" style="width:13%">
-        <div class="header">
-          <h3 class="centrado" style="font-size:11px"><b>Total</b></h3>
-        </div>
-        <div class="budget" style="text-align: right">
-          <p *ngFor="let prep of data.budget.rows">{{prep.price * prep.amount}}€</p>
-        </div>
-        <!-- <div class="footer bordertop">
-          {{ (data.budget.price * data.budget.amount) * 0.21 }}
-        </div> -->
-      </div>
-    </div>
-
-    <div class=" flex">
-        <div style="width:61%">
-        </div>
-        <div style="width:13%">
-        </div>
-        <div class="article" style="width:13%">
-          <div class="foot" style="text-align: center; font-weight: bold;">
-            IVA
-          </div>
-        </div>
-        <div class="article" style="width:13%; margin-right: 3px;">
-          <div class="foot" style="text-align: right" >
-            {{data.budget.ivaF}}
-          </div>
-        </div>
-      </div>
-      <div class="flex">
-          <div style="width:61%">
-          </div>
-          <div style="width:13%">
-          </div>
-          <div class="article" style="width:13%">
-            <div class="foot" style="text-align: center; font-weight: bold;">
-              Total
-            </div>
-          </div>
-          <div class="article" style="width:13%; margin-right: 3px;">
-            <div class="foot" style="text-align: right">
-              {{data.budget.totalIva}}€
-            </div>
-          </div>
-        </div>
-
-    <!--------------------------------------------------------------------------------------------->
-    <!-- <div class="section flex">
-      <div class="article width">
-        <div class="header">
-          <h3 class="centrado" style="font-size:11px"><b>Observaciones del Taller</b></h3>
-        </div>
-        <div class="content">
-          
-        </div>
-      </div>
-    </div> -->
-    <!--------------------------------------------------------------------------------------------->
-    <div class="footer flex column" style="margin: 10px 0 0 0">
-      <h1 class="centrado"><b>RENUNCIA A LA ELABORACIÓN DE PRESUPUESTO PREVIO</b></h1>
-      <p><b>EL CLIENTE TIENE DERECHO A LA ELABORACIÓN DE UN PRESUPUESTO PREVIO. MEDIANTE LA PRESENTE FIRMA, EL USUARIO
-          RENUNCIA A LA ELABORACIÓN DE PRESUPUESTO PREVIO, Y AUTORIZA A REALIZAR LOS TRABAJOS NECESARIOS PARA LA
-          REPARACIÓN DEL VEHÍCULO Y/O SERVICIOS SOLICITADOS CONFORME A LO REFLEJADO EN ESTE RESGUARDO DE DEPÓSITO</b>
-      </p>
-    </div>
-  </div>
-</ion-content>
-<ion-footer>
-  <ion-toolbar>
-    <ion-button (click)="exportPdf()">pdf</ion-button>
   </ion-toolbar>
-</ion-footer>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col style="padding: 0 0 0 0" size="5">
+      <div class="frame">
+        <div class="albaran" id="pdf">
+          <div class="header flex column">
+            <h1 class="centrado" style="font-size:20px"><b>EJEMPLAR DE OBLIGADA ENTREGA AL CLIENTE</b></h1>
+            <h4 class="centrado" style="font-size:11px"><b>RESGUARDO DE DEPÓSITO SIN PRESUPUESTO</b></h4>
+            <div class="header-box flex">
+              <div style="width:15%; margin-left: 20px;" class="flex column">
+                <label style="margin-bottom: 2px">TALLER:</label>
+                <label style="margin-bottom: 2px">DIRECCION:</label>
+                <label style="margin-bottom: 2px">TELEFONO:</label>
+                <label style="margin-bottom: 2px">CIF:</label>
+                <label style="margin-bottom: 2px">email:</label>
+              </div>
+              <div style="width:35%" class="flex column">
+                <input type="text" class="text width" value="ODDM Workshop">
+                <input type="text" class="text width" value="c/Virgen de las Flores 23, 29007-Malaga">
+                <input type="text" class="text width" value="Telf: 952 30 51 00">
+                <input type="text" class="text width" value="B92736602">
+                <input type="text" class="text width" value="oddmworkshop@gmail.com">
+              </div>
+              <div style="width:50%" class="flex column">
+                <label>RESGUARDO DE DEPÓSITO/ORDEN DE REPARACIÓN</label>
+                <br>
+                <div>
+                  <label><b>NºOrden reparación:</b></label>
+                  <label class="text strong">{{data.averia.id}}</label><br><br>
+                  <label><b>Fecha:</b></label>
+                  <label class="text strong">{{data.averia.date}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--------------------------------------------------------------------------------------------->
+          <div class="section flex">
+            <div class="article" style="width:50%">
+              <div class="header">
+                <h3 class="centrado" style="font-size:11px"><b>Vehiculo</b></h3>
+              </div>
+              <div class="content">
+                <div class="double-input">
+                  <label>Matrícula:</label>
+                  <label class="text strong">{{data.vehiculo.enrollment}}</label>
+                  <label>Marca:</label>
+                  <label class="text strong">{{data.vehiculo.brand}}</label>
+                </div>
+                <div class="double-input">
+                  <label>Modelo:</label> <label class="text strong">{{data.vehiculo.model}}</label>
+                  <label>Color:</label> <label class="text strong">{{data.vehiculo.color}}</label>
+                </div>
+                <div class="double-input">
+                  <label>Kilómetros:</label>
+                  <label class="text strong">{{data.vehiculo.kilometers}}</label>
+                  <label>Matriculación:</label>
+                  <label class="text strong">{{data.vehiculo.year}}</label>
+                </div>
+              </div>
+            </div>
+            <div class="article" style="width:50%">
+              <div class="header">
+                <h3 class="centrado" style="font-size:11px"><b>CLIENTE</b></h3>
+              </div>
+              <div class="content">
+                <label>Cliente:</label> <label class="text strong"
+                  style="width: 120px;">{{data.cliente.name}}</label><br>
+                <label>NIF/CIF:</label> <label class="text strong">{{data.cliente.nif}}</label> <br>
+                <label>Dirección:</label> <label class="text strong">{{data.cliente.address}}</label><br>
+                <label>Correo:</label> <label class="text strong"
+                  style="width: 120px;">{{data.cliente.email}}</label><br>
+                <label>Telf:</label> <label class="text strong">{{data.cliente.phone}}</label>
+                <br>
+              </div>
+            </div>
+          </div>
+          <!--------------------------------------------------------------------------------------------->
+          <div class="section flex">
+            <div class="article width">
+              <div class="anomalias flex">
+                <div style="width:30%;">
+                  <p class="centrado">Anomalías Observadas:</p>
+                  <div class="imagen">
+                    <img [src]="data.averia.imageB64" alt="">
+                  </div>
+                </div>
+                <div style="width:35%;">
+                  <p style="font-weight: bold">Reparacion Carroceria</p>
+                  <p *ngFor="let dam of data.detalles.damages; let i = index;">
+                    {{i+1}}. Ks{{dam}}
+                  </p>
+                </div>
+                <div style="width:35%;">
+                  <p style="font-weight: bold">Reparacion Interna</p>
+                  <p *ngFor="let dai of data.detalles.internDamages">
+                    {{dai}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--------------------------------------------------------------------------------------------->
+          <div class="section flex">
+            <div class="article" style="width:61%">
+              <div class="header">
+                <h3 class="centrado" style="font-size:11px"><b>Servicios Solicitados</b></h3>
+              </div>
+              <div class="budget">
+                <p *ngFor="let prep of data.budget.rows">- {{prep.desc}}</p>
+              </div>
+            </div>
+            <div class="article" style="width:13%">
+              <div class="header">
+                <h3 class="centrado" style="font-size:11px"><b>Precio</b></h3>
+              </div>
+              <div class="budget" style="text-align: right">
+                <p *ngFor="let prep of data.budget.rows">{{prep.price}}€</p>
+              </div>
+              <!-- <div class="footer bordertop">
+        
+              </div> -->
+            </div>
+            <div class="article" style="width:13%">
+              <div class="header">
+                <h3 class="centrado" style="font-size:11px"><b>Cantidad</b></h3>
+              </div>
+              <div class="budget" style="text-align: right">
+                <p *ngFor="let prep of data.budget.rows">{{prep.amount}}</p>
+              </div>
+              <!-- <div class="footer bordertop">
+                <p>IVA</p>
+              </div> -->
+            </div>
+            <div class="article" style="width:13%">
+              <div class="header">
+                <h3 class="centrado" style="font-size:11px"><b>Total</b></h3>
+              </div>
+              <div class="budget" style="text-align: right">
+                <p *ngFor="let prep of data.budget.rows">{{prep.price * prep.amount}}€</p>
+              </div>
+              <!-- <div class="footer bordertop">
+                {{ (data.budget.price * data.budget.amount) * 0.21 }}
+              </div> -->
+            </div>
+          </div>
+
+          <div class=" flex">
+            <div style="width:61%">
+            </div>
+            <div style="width:13%">
+            </div>
+            <div class="article" style="width:13%">
+              <div class="foot" style="text-align: center; font-weight: bold;">
+                IVA
+              </div>
+            </div>
+            <div class="article" style="width:13%; margin-right: 3px;">
+              <div class="foot" style="text-align: right">
+                {{data.budget.ivaF}}€
+              </div>
+            </div>
+          </div>
+          <div class="flex">
+            <div style="width:61%">
+            </div>
+            <div style="width:13%">
+            </div>
+            <div class="article" style="width:13%">
+              <div class="foot" style="text-align: center; font-weight: bold;">
+                Total
+              </div>
+            </div>
+            <div class="article" style="width:13%; margin-right: 3px;">
+              <div class="foot" style="text-align: right">
+                {{data.budget.totalIva}}€
+              </div>
+            </div>
+          </div>
+
+          <!--------------------------------------------------------------------------------------------->
+          <!-- <div class="section flex">
+            <div class="article width">
+              <div class="header">
+                <h3 class="centrado" style="font-size:11px"><b>Observaciones del Taller</b></h3>
+              </div>
+              <div class="content">
+                
+              </div>
+            </div>
+          </div> -->
+          <!--------------------------------------------------------------------------------------------->
+          <div class="footer flex column" style="margin: 20px 0 0 0">
+            <h1 class="centrado"><b>RENUNCIA A LA ELABORACIÓN DE PRESUPUESTO PREVIO</b></h1>
+            <p><b>EL CLIENTE TIENE DERECHO A LA ELABORACIÓN DE UN PRESUPUESTO PREVIO. MEDIANTE LA PRESENTE FIRMA, EL
+                USUARIO
+                RENUNCIA A LA ELABORACIÓN DE PRESUPUESTO PREVIO, Y AUTORIZA A REALIZAR LOS TRABAJOS NECESARIOS PARA LA
+                REPARACIÓN DEL VEHÍCULO Y/O SERVICIOS SOLICITADOS CONFORME A LO REFLEJADO EN ESTE RESGUARDO DE
+                DEPÓSITO</b>
+            </p>
+          </div>
+          <div class="footer flex" style="margin: 70px 0 0 0">
+            <p style="text-decoration: underline; margin-left: 20px; ">Firmado</p>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+
+    <ion-col style="padding-left: 20px" size="7">
+      <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
+        <ion-icon name="mail-unread" padding color="dark"></ion-icon>
+        <ion-input type="mail" name="mail" [(ngModel)]="data.cliente.email" color="dark" placeholder="Email"></ion-input>
+      </ion-item>
+
+      <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid; padding: 5px 5px 5px 5px; background-color:  #3880ff;" color="primary">
+          <ion-icon name="star" padding color="dark"></ion-icon>
+        <ion-input type="text" color="dark" placeholder="Asunto"></ion-input>
+      </ion-item>
+
+      <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid; padding: 5px 5px 5px 5px; background-color:  #3880ff;" color="primary">
+          <ion-icon name="information-circle-outline" padding color="dark"></ion-icon>
+        <ion-textarea type="text" color="dark" placeholder="Mensaje" rows="25"></ion-textarea>
+      </ion-item>
+
+      <ion-button fill="solid" expand="block" color="primary">
+          <ion-icon name="paper-plane" padding size="large"></ion-icon>
+          <ion-label size="large">Enviar email</ion-label>
+        </ion-button>
+
+        <ion-button fill="solid" expand="block" color="primary" (click)="exportPdf()">
+            <ion-icon name="document" padding size="large"></ion-icon>
+            <ion-label size="large">Descargar PDF</ion-label>
+          </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

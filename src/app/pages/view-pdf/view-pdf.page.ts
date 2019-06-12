@@ -27,12 +27,12 @@ export class ViewPdfPage implements OnInit {
 
   async exportPdf() {
     const div = document.getElementById("pdf");
-    const options = { background: "white", height: 845, width: 595 };
+    const options = { background: "white", height: 766.5, width: 654 };
     domtoimage.toPng(div, options).then((dataUrl)=> {
         //Initialize JSPDF
         var doc = new jsPDF("p","mm","a4");
         //Add image Url to PDF
-        doc.addImage(dataUrl, 'PNG', 0, 0, 210, 360);
+        doc.addImage(dataUrl, 'PNG', 0, 0, 220, 295);
 
         doc.save("prueba.pdf");
 
@@ -40,6 +40,10 @@ export class ViewPdfPage implements OnInit {
     .catch(function (error) {
 
     });
+  }
+
+  back(){
+    this.router.navigate(["/menu"])
   }
 
 }

@@ -1,6 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Registrar Usuario</ion-title>
+    <ion-buttons slot="start">
+      <ion-button fill="solid" (click)="back()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Volver
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-center>Registrar Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,39 +21,43 @@
     <ion-row>
       <ion-col>
         <ion-item style=" border: 2px #000 solid" color="primary">
-          <ion-radio value="mecanico" checked color="dark"></ion-radio>
+          <ion-radio color="dark" value="Mecanico"></ion-radio>
           <ion-label>Mecanico</ion-label>
         </ion-item>
       </ion-col>
 
       <ion-col>
         <ion-item style=" border: 2px #000 solid" color="primary">
-          <ion-radio value="oficina" color="dark"></ion-radio>
+          <ion-radio value="T. Oficina" color="dark" checked></ion-radio>
           <ion-label>Oficina</ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
   </ion-radio-group>
 
-<ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
+  <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
     <ion-icon name="mail-unread" padding color="dark"></ion-icon>
     <ion-input type="mail" name="mail" [(ngModel)]="mail" color="dark" placeholder="Email"></ion-input>
   </ion-item>
 
   <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
-      <ion-icon name="lock" padding color="dark"></ion-icon>
-      <ion-input type="text" name="password" [(ngModel)]="password" color="dark" placeholder="Contraseña"></ion-input>
-    </ion-item>
+    <ion-icon name="lock" padding color="dark"></ion-icon>
+    <ion-input type="text" name="password" [(ngModel)]="password" color="dark" placeholder="Contraseña"></ion-input>
+  </ion-item>
 
-    <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
-        <ion-icon name="lock" padding color="dark"></ion-icon>
-        <ion-input type="text" name="cpassword" [(ngModel)]="cpassword" color="dark" placeholder="Repetir Contraseña"></ion-input>
-      </ion-item>
+  <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
+    <ion-icon name="lock" padding color="dark"></ion-icon>
+    <ion-input type="text" name="cpassword" [(ngModel)]="cpassword" color="dark" placeholder="Repetir Contraseña">
+    </ion-input>
+  </ion-item>
 
   <ion-row>
     <ion-col size="4"></ion-col>
     <ion-col size="4">
-      <ion-button fill="solid" expand="block" color="dark" (click)="register()">Registrar</ion-button>
+      <ion-button fill="solid" expand="block" color="primary" (click)="register()">
+        <ion-icon name="md-checkmark-circle-outline" padding size="large"></ion-icon>
+        <ion-label size="large">Registrar</ion-label>
+      </ion-button>
     </ion-col>
   </ion-row>
 

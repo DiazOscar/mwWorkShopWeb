@@ -18,8 +18,8 @@
         <ion-title color="dark" style="font-size: 30px">{{this.customer.name}} - {{this.customer.nif}}</ion-title>
         <ion-title color="dark" style="font-size: 30px">{{this.vehicle.enrollment}} - {{this.vehicle.brand}} - {{this.vehicle.model}}</ion-title>
     </ion-col>
-    <ion-col size="6" >
-      <canvas #myCanvas id="myCanvas" style="border: 2px #000 solid"></canvas>    
+    <ion-col size="6" style="text-align: center">
+      <img [src]="this.data.imageB64" alt="" height="300px" width="500px">    
     </ion-col>
   </ion-row>
   <ion-row>
@@ -56,8 +56,9 @@
 
 <ion-footer no-border>
   <ion-toolbar color="medium">
-      <ion-button color="medium">
+      <ion-button color="light" (click)="goBudget()">
           <ion-icon name="document" color="primary" size="large"></ion-icon>
+          <ion-label color="primary">PRESUPUESTO</ion-label>
         </ion-button>
   </ion-toolbar>
 </ion-footer>

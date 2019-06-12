@@ -57,4 +57,6 @@ export class MenuPage implements OnInit {
     this.router.navigate(['/budget'], navigationExtras);
   }
 
+  
+
 }

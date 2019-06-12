@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { CustomerService } from 'src/app/services/customer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DetailsService } from 'src/app/services/details.service';
@@ -55,11 +55,11 @@ export class DamageDetailsPage implements OnInit {
       console.log(this.vehicle);
    });
  
-   this.canvasElement = this.canvas.nativeElement;
-   this.setBackgroundImage();
-   this.canvasElement.width = document.body.clientWidth*8/ 20 ;
-   this.canvasElement.height = (document.body.clientHeight*4)/12;
-   this.ctx = this.canvasElement.getContext('2d');
+  //  this.canvasElement = this.canvas.nativeElement;
+  //  this.setBackgroundImage();
+  //  this.canvasElement.width = document.body.clientWidth*8/ 20 ;
+  //  this.canvasElement.height = (document.body.clientHeight*4)/12;
+  //  this.ctx = this.canvasElement.getContext('2d');
 
    setTimeout(() => {
      this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) =>{
@@ -87,8 +87,17 @@ export class DamageDetailsPage implements OnInit {
     }
   }
 
-  comeback(){
+  comeback(){ 
     this.router.navigate(["/menu"]);
+  }
+
+  goBudget(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        incidence: this.data
+      }
+    };
+    this.router.navigate(['/budget'], navigationExtras);
   }
 
 }

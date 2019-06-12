@@ -25,28 +25,62 @@ export class RegisterPage implements OnInit {
   }
 
   async register(){
-    const {mail, password, cpassword} = this
-    
-    let profile = {
-      user : this.user,
-      rol : this.rol,
-      mail : this.mail
-    }
+    if(this.user != "" && this.rol != "" && this.mail != "" && this.password != "" && this.cpassword != ""){ 
+      const {mail, password, cpassword} = this
+      
+      let profile = {
+        user : this.user,
+        rol : this.rol,
+        mail : this.mail
+      }
+  
+      console.log(profile);
+      if(password !== cpassword){
+        const toast = await this.toastCtrl.create({
+          message: "Las contraseñas no coinciden",
+          color: "light",
+          duration: 2000,
+          mode: "ios",
+          cssClass: "toastcss",
+        });
 
-    console.log(profile);
-    if(password !== cpassword){
+        toast.present();
+        return console.log("password don't match");
+      }
+      
+      try{        
+        const res = await this.afAuth.auth.createUserWithEmailAndPassword(mail, password);
+        this.userService.createUser(profile);
+        this.router.navigate(["/users"]);
+      }catch(err){
+        console.log(err);
+        const toast = await this.toastCtrl.create({
+          message: err+"",
+          color: "light",
+          duration: 2000,
+          mode: "ios",
+          cssClass: "toastcss",
+        });
+
+        toast.present();
+      }
+    }else{
+      const toast = await this.toastCtrl.create({
+        message: "Todos los campos deben estar rellenos",
+        color: "light",
+        duration: 2000,
+        mode: "ios",
+        cssClass: "toastcss",
+      });
+
+      toast.present();
       return console.log("password don't match");
     }
     
-    try{
-      this.userService.createUser(profile);
-      const res = await this.afAuth.auth.createUserWithEmailAndPassword(mail, password);
+  }
 
-      this.router.navigate(["/users"]);
-    }catch(err){
-      console.log(err);
-    }
-    
+  back(){
+    this.router.navigate(["/users"]);
   }
 
 }

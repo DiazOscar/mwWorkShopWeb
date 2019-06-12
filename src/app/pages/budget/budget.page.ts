@@ -81,7 +81,7 @@ export class BudgetPage implements OnInit {
     }
     this.budget.totalF = String(cant.toFixed(2));
     this.budget.ivaF = String((Math.round(iva*100)/100).toFixed(2));
-    this.budget.totalIva = String(cant + iva);
+    this.budget.totalIva = String(Math.round(cant + iva).toFixed(2));
     console.log(this.budget.totalF);
   }
 
@@ -102,6 +102,10 @@ export class BudgetPage implements OnInit {
 
     this.router.navigate(['/view-pdf'], navigationExtras);
     console.log(navigationExtras);
+  }
+
+  back(){
+    this.router.navigate(["/menu"])
   }
 
 }
