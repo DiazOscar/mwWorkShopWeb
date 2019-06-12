@@ -27,14 +27,14 @@ export class ViewPdfPage implements OnInit {
 
   async exportPdf() {
     const div = document.getElementById("pdf");
-    const options = { background: "white", height: 766.5, width: 654 };
+    const options = { background: "white", height: 845, width: 595 };
     domtoimage.toPng(div, options).then((dataUrl)=> {
         //Initialize JSPDF
         var doc = new jsPDF("p","mm","a4");
         //Add image Url to PDF
-        doc.addImage(dataUrl, 'PNG', 0, 0, 220, 295);
+        doc.addImage(dataUrl, 'PNG', 0, 0, 210, 340);
 
-        doc.save("prueba.pdf");
+        doc.save(this.data.averia.id+".pdf");
 
     })
     .catch(function (error) {
