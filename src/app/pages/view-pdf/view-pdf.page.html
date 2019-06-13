@@ -53,20 +53,19 @@
               </div>
               <div class="content">
                 <div class="double-input">
-                  <label>Matrícula:</label>
-                  <label class="text strong">{{data.vehiculo.enrollment}}</label>
-                  <label>Marca:</label>
-                  <label class="text strong">{{data.vehiculo.brand}}</label>
+                  <label>Matrícula:</label><label class="text strong">{{data.vehiculo.enrollment}}</label>
+                  <label>Marca:</label><label class="text strong">{{data.vehiculo.brand}}</label>
                 </div>
                 <div class="double-input">
                   <label>Modelo:</label> <label class="text strong">{{data.vehiculo.model}}</label>
                   <label>Color:</label> <label class="text strong">{{data.vehiculo.color}}</label>
                 </div>
                 <div class="double-input">
-                  <label>Kilómetros:</label>
-                  <label class="text strong">{{data.vehiculo.kilometers}}</label>
-                  <label>Matriculación:</label>
-                  <label class="text strong">{{data.vehiculo.year}}</label>
+                  <label>Kilómetros:</label><label class="text strong">{{data.vehiculo.kilometers}}</label>
+                  <label>Matriculación:</label><label class="text strong">{{data.vehiculo.year}}</label>
+                </div>
+                <div class="double-input">
+                  <label>Gasolina:</label><label class="text strong">{{data.vehiculo.gas}}</label>
                 </div>
               </div>
             </div>
@@ -74,7 +73,7 @@
               <div class="header">
                 <h3 class="centrado" style="font-size:11px"><b>CLIENTE</b></h3>
               </div>
-              <div class="content">
+              <div style="padding-left: 5px; padding-top: 3px;">
                 <label>Cliente:</label> <label class="text strong"
                   style="width: 120px;">{{data.cliente.name}}</label><br>
                 <label>NIF/CIF:</label> <label class="text strong">{{data.cliente.nif}}</label> <br>
@@ -87,7 +86,7 @@
             </div>
           </div>
           <!--------------------------------------------------------------------------------------------->
-          <div class="section flex">
+          <div class="section flex" style="max-height: 150px;">
             <div class="article width">
               <div class="anomalias flex">
                 <div style="width:30%;">
@@ -98,13 +97,13 @@
                 </div>
                 <div style="width:35%;">
                   <p style="font-weight: bold">Reparacion Carroceria</p>
-                  <p *ngFor="let dam of data.detalles.damages; let i = index;">
+                  <p *ngFor="let dam of data.detalles.damages; let i = index;" style="margin: 0 0 0 0">
                     {{i+1}}. Ks{{dam}}
                   </p>
                 </div>
                 <div style="width:35%;">
                   <p style="font-weight: bold">Reparacion Interna</p>
-                  <p *ngFor="let dai of data.detalles.internDamages">
+                  <p *ngFor="let dai of data.detalles.internDamages"  style="margin: 0 0 0 0">
                     {{dai}}
                   </p>
                 </div>

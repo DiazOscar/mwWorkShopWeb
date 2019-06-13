@@ -28,6 +28,10 @@ export class ViewPdfPage implements OnInit {
         this.data = this.router.getCurrentNavigation().extras.state.datos;
         console.log(this.data);
       }
+
+      if(this.data.details.damages.length > 9){
+
+      }
     });
   }
 
