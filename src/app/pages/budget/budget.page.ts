@@ -22,11 +22,11 @@ export class BudgetPage implements OnInit {
     totalF: '',
     totalIva: ''
   }
-  
+
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private customerService:CustomerService,
+    private customerService: CustomerService,
     private vehicleService: VehicleService,
     private detailsService: DetailsService) {
     this.route.queryParams.subscribe(params => {
@@ -37,55 +37,57 @@ export class BudgetPage implements OnInit {
     });
 
     setTimeout(() => {
-      this.detailsService.getDetail(this.data.id).subscribe((det) =>{
-      this.details = det.payload.data()
-      console.log(this.details);
-   });
+      this.detailsService.getDetail(this.data.id).subscribe((det) => {
+        this.details = det.payload.data()
+        console.log(this.details);
+      });
     }, 350);
-    
+
   }
 
   ngOnInit() {
-    this.vehicleService.getVehicle(this.data.car).subscribe((veh) =>{
+    this.vehicleService.getVehicle(this.data.car).subscribe((veh) => {
       this.vehicle = veh.payload.data()
       console.log(this.vehicle);
-   });
+    });
 
-   setTimeout(() => {
-    this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) =>{
-      this.customer = cus.payload.data()
-      console.log(this.customer);
-    })
-  }, 350);
+    setTimeout(() => {
+      this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) => {
+        this.customer = cus.payload.data()
+        console.log(this.customer);
+      })
+    }, 350);
+
   }
 
   addRow() {
-    this.budget.rows.push({desc: "",
-                    amount: ""
-                  })
+    this.budget.rows.push({
+      desc: "",
+      amount: ""
+    });
     console.log(this.budget.rows);
   }
 
-  removeRow(row){
+  removeRow(row) {
     this.budget.rows.splice(row, 1);
     this.total();
   }
 
-  total(){
+  total() {
     let iva: number = 0;
     let cant: number = 0;
-    for(let row of this.budget.rows){
+    for (let row of this.budget.rows) {
       console.log(row);
       cant += row.price * row.amount;
       iva += (row.price * row.amount) * 0.21;
     }
     this.budget.totalF = String(cant.toFixed(2));
-    this.budget.ivaF = String((Math.round(iva*100)/100).toFixed(2));
+    this.budget.ivaF = String((Math.round(iva * 100) / 100).toFixed(2));
     this.budget.totalIva = String(Math.round(cant + iva).toFixed(2));
     console.log(this.budget.totalF);
   }
 
-  goPDF(){
+  goPDF() {
     let datos = {
       averia: this.data,
       detalles: this.details,
@@ -95,16 +97,16 @@ export class BudgetPage implements OnInit {
     }
 
     let navigationExtras: NavigationExtras = {
-      state:{
-        datos: datos  
-      }       
+      state: {
+        datos: datos
+      }
     };
 
     this.router.navigate(['/view-pdf'], navigationExtras);
     console.log(navigationExtras);
   }
 
-  back(){
+  back() {
     this.router.navigate(["/menu"])
   }
 

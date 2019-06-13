@@ -225,20 +225,20 @@
 
       <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid; padding: 5px 5px 5px 5px; background-color:  #3880ff;" color="primary">
           <ion-icon name="star" padding color="dark"></ion-icon>
-        <ion-input type="text" color="dark" placeholder="Asunto"></ion-input>
+        <ion-input type="text" [(ngModel)]="subject" color="dark" placeholder="Asunto"></ion-input>
       </ion-item>
 
       <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid; padding: 5px 5px 5px 5px; background-color:  #3880ff;" color="primary">
           <ion-icon name="information-circle-outline" padding color="dark"></ion-icon>
-        <ion-textarea type="text" color="dark" placeholder="Mensaje" rows="25"></ion-textarea>
+        <ion-textarea type="text" [(ngModel)]="body" color="dark" placeholder="Mensaje" rows="25"></ion-textarea>
       </ion-item>
 
-      <ion-button fill="solid" expand="block" color="primary">
+      <ion-button fill="solid" expand="block" color="primary" (click)="exportPdf(2)">
           <ion-icon name="paper-plane" padding size="large"></ion-icon>
           <ion-label size="large">Enviar email</ion-label>
         </ion-button>
 
-        <ion-button fill="solid" expand="block" color="primary" (click)="exportPdf()">
+        <ion-button fill="solid" expand="block" color="primary" (click)="exportPdf(1)">
             <ion-icon name="document" padding size="large"></ion-icon>
             <ion-label size="large">Descargar PDF</ion-label>
           </ion-button>

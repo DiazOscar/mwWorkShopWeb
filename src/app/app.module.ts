@@ -17,6 +17,8 @@ import { AngularFireStorageModule} from 'angularfire2/storage';
 
 import { environment } from 'src/environments/environment';
 
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,11 +30,12 @@ import { environment } from 'src/environments/environment';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireStorageModule,
+    AngularFireStorageModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    EmailComposer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
