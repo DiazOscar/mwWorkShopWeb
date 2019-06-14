@@ -64,24 +64,24 @@
         <ion-row>
           <ion-col class="border" size="7.5">
             <div>
-              <ion-input [(ngModel)]="budget.rows[i].desc" maxlength="40"></ion-input>
+              <ion-input [(ngModel)]="budget.rows[i].desc" #inputs maxlength="40" autofocus></ion-input>
             </div>
           </ion-col>
           <ion-col class="border" size="1.5">
             <div style="text-align: right">
-              <ion-input type="number" [(ngModel)]="budget.rows[i].price" (ionChange)="checkPriceChange(i)" inputmode="numeric" min="1" (ionChange)="total()"></ion-input>
+              <ion-input type="number" [(ngModel)]="budget.rows[i].price" (ionChange)="checkPriceChange(i)" min="1" (ionChange)="total()"></ion-input>
             </div>
           </ion-col>
           <ion-col class="border" size="1.5">
             <div style="text-align: right">
-              <ion-input type="number" [(ngModel)]="budget.rows[i].amount" (ionBlur)="total()" (ionChange)="checkUnits(i)" min="1" (ionChange)="total()"></ion-input>
+              <ion-input type="number" [(ngModel)]="budget.rows[i].amount" (ionBlur)="total()" (ionChange)="checkUnits(i)" (ionChange)="total()" min="1"></ion-input>
             </div>
           </ion-col>
           <ion-col class="border center" size="1">
             <ion-label [(ngModel)]="budget.rows[i].total" color="dark">{{row.price * row.amount}}</ion-label>
             
           </ion-col>
-          <ion-icon (click)="removeRow(i)" size="large" name="close-circle" color="dark" style="margin-top: 6px"></ion-icon>
+          <ion-icon (click)="removeRow(i)" size="large" name="close-circle" color="dark" style="margin-top: 6px" (ionChange)="total()"></ion-icon>
         </ion-row>
       </div>
     </ion-list>
@@ -95,7 +95,7 @@
         <ion-label color="dark">TOTAL SIN IVA</ion-label>
       </ion-col>
       <ion-col class="border" size="1.5" style="text-align: right">
-        <ion-label color="dark" [(ngModel)]="budget.totalF">{{ budget.totalF}}</ion-label>
+        <ion-label color="dark" [(ngModel)]="budget.totalF">{{ budget.totalF }}</ion-label>
       </ion-col>
     </ion-row>
 

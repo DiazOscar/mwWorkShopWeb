@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, ViewChildren  } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { DetailsService } from 'src/app/services/details.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
+
 
 
 @Component({
@@ -12,6 +13,7 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./budget.page.scss'],
 })
 export class BudgetPage implements OnInit {
+  @ViewChildren('inputs') myInput;
 
   data: any;
   vehicle: any;
@@ -29,7 +31,7 @@ export class BudgetPage implements OnInit {
     private router: Router,
     private customerService: CustomerService,
     private vehicleService: VehicleService,
-    private detailsService: DetailsService, private toastCtrl: ToastController) {
+    private detailsService: DetailsService, private toastCtrl: ToastController , private renderer: Renderer2) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.incidence;
@@ -56,18 +58,24 @@ export class BudgetPage implements OnInit {
       this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) => {
         this.customer = cus.payload.data();
         console.log(this.customer);
-      })
+      });
     }, 350);
 
   }
 
   addRow() {
+
     this.budget.rows.push({
-      desc: "",
+      desc: '',
       amount: 1,
       price: 0,
     });
-    console.log(this.budget.rows);
+
+    setTimeout(() => {
+      this.myInput.changes.subscribe((items: Array<any>) => {
+        items.forEach((item: any) => item.setFocus());
+      });
+    }, 500);
   }
 
   removeRow(row) {
@@ -86,7 +94,7 @@ export class BudgetPage implements OnInit {
     this.budget.totalF = String(cant.toFixed(2));
     this.budget.ivaF = String((Math.round(iva * 100) / 100).toFixed(2));
     this.budget.totalIva = String(Math.round(cant + iva).toFixed(2));
-    console.log(this.budget.totalF);
+    console.log(this.budget.totalF,this.budget.ivaF, this.budget.totalIva);
   }
 
   goPDF() {
@@ -158,6 +166,8 @@ export class BudgetPage implements OnInit {
     if (this.budget.rows[i].price > 100000) {
       this.budget.rows[i].price = 0;
     }
+    
+    //this.renderer.selectRootElement(this.myInput.nativeElement).focus();
   }
 
   checkUnits(i: number) {

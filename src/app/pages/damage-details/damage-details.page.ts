@@ -56,7 +56,7 @@ export class DamageDetailsPage implements OnInit {
   //  this.ctx = this.canvasElement.getContext('2d');
 
    setTimeout(() => {
-     this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) =>{
+     this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) => {
        this.customer = cus.payload.data()
        console.log(this.customer);
      })
@@ -69,18 +69,18 @@ export class DamageDetailsPage implements OnInit {
   }
 
   setBackgroundImage(){
-    let context = this.canvasElement.getContext("2d");
+    let context = this.canvasElement.getContext('2d');
 
     var background = new Image();
     background.src = this.data.imagePath;
 
-    background.onload = function(){
-      context.drawImage(background,0,0, document.body.clientWidth*8/20, (document.body.clientHeight * 4) / 12);
+    background.onload = function() {
+      context.drawImage(background, 0, 0, document.body.clientWidth * 8 / 20, (document.body.clientHeight * 4) / 12);
     }
   }
 
-  comeback() { 
-    this.router.navigate(["/menu"]);
+  comeback() {
+    this.router.navigate(['/menu']);
   }
 
   goBudget() {
