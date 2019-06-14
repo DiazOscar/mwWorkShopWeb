@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from 'angularfire2/storage';
 import { finalize } from 'rxjs/operators';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-pdf',
@@ -22,7 +23,7 @@ export class ViewPdfPage implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private storageAng: AngularFireStorage,
-    private emailComposer: EmailComposer) {
+    private emailComposer: EmailComposer, private toastCtrl: ToastController) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.datos;
@@ -54,6 +55,9 @@ export class ViewPdfPage implements OnInit {
           doc.save(this.data.averia.id + ".pdf");
           break;
         case 2:
+          if (this.subject.length == 0 || this.data.cliente.email.length == 0) {
+            this.toast('El mensaje del cliente y cabecera deben de estar rellenos');
+          } else {
           let blob = doc.output('blob');
           console.log(blob);
           setTimeout(() => {
@@ -83,6 +87,7 @@ export class ViewPdfPage implements OnInit {
               .subscribe();
           }, 500);
       }
+    }
     })
       .catch(function (error) {
 
@@ -90,7 +95,19 @@ export class ViewPdfPage implements OnInit {
   }
 
   back() {
-    this.router.navigate(["/menu"])
+    this.router.navigate(["/menu"]);
+  }
+
+  async toast(message: any) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      color: 'light',
+      duration: 2000,
+      mode: 'ios',
+      cssClass: 'toastcss',
+    });
+
+    toast.present();
   }
 
 }

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { DetailsService } from 'src/app/services/details.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-budget',
@@ -21,14 +23,13 @@ export class BudgetPage implements OnInit {
     ivaF: '',
     totalF: '',
     totalIva: ''
-  }
-
+  };
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private customerService: CustomerService,
     private vehicleService: VehicleService,
-    private detailsService: DetailsService) {
+    private detailsService: DetailsService, private toastCtrl: ToastController) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.incidence;
@@ -38,7 +39,7 @@ export class BudgetPage implements OnInit {
 
     setTimeout(() => {
       this.detailsService.getDetail(this.data.id).subscribe((det) => {
-        this.details = det.payload.data()
+        this.details = det.payload.data();
         console.log(this.details);
       });
     }, 350);
@@ -47,13 +48,13 @@ export class BudgetPage implements OnInit {
 
   ngOnInit() {
     this.vehicleService.getVehicle(this.data.car).subscribe((veh) => {
-      this.vehicle = veh.payload.data()
+      this.vehicle = veh.payload.data();
       console.log(this.vehicle);
     });
 
     setTimeout(() => {
       this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) => {
-        this.customer = cus.payload.data()
+        this.customer = cus.payload.data();
         console.log(this.customer);
       })
     }, 350);
@@ -63,7 +64,8 @@ export class BudgetPage implements OnInit {
   addRow() {
     this.budget.rows.push({
       desc: "",
-      amount: ""
+      amount: 1,
+      price: 0,
     });
     console.log(this.budget.rows);
   }
@@ -88,26 +90,80 @@ export class BudgetPage implements OnInit {
   }
 
   goPDF() {
-    let datos = {
-      averia: this.data,
-      detalles: this.details,
-      cliente: this.customer,
-      vehiculo: this.vehicle,
-      budget: this.budget
+    if (this.budget.rows.length == 0) {
+      this.toast('Debes de rellenar el presupuesto');
+    } else if (this.checkDescription()) {
+      this.toast('Tienes que rellenar todos los campos');
+    } else if (this.checkPrice()) {
+      this.toast('Los precios no pueden estar a 0');
+    } else {
+      let datos = {
+        averia: this.data,
+        detalles: this.details,
+        cliente: this.customer,
+        vehiculo: this.vehicle,
+        budget: this.budget
+      };
+
+      let navigationExtras: NavigationExtras = {
+        state: {
+          datos: datos
+        }
+      };
+
+      this.router.navigate(['/view-pdf'], navigationExtras);
+      console.log(navigationExtras);
     }
+  }
 
-    let navigationExtras: NavigationExtras = {
-      state: {
-        datos: datos
+  checkDescription(): Boolean {
+    let answer: Boolean = false;
+    for (let bu of this.budget.rows) {
+      if (bu.desc.length == 0) {
+        answer = true;
+        break;
       }
-    };
+    }
+    return answer;
+  }
 
-    this.router.navigate(['/view-pdf'], navigationExtras);
-    console.log(navigationExtras);
+  checkPrice(): Boolean {
+    let answer: Boolean = false;
+    for (let bu of this.budget.rows) {
+      if (bu.price == 0) {
+        answer = true;
+        break;
+      }
+    }
+    return answer;
+  }
+
+  async toast(message: any) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      color: 'light',
+      duration: 2000,
+      mode: 'ios',
+      cssClass: 'toastcss',
+    });
+
+    toast.present();
   }
 
   back() {
-    this.router.navigate(["/menu"])
+    this.router.navigate(['/menu']);
+  }
+
+  checkPriceChange(i: number) {
+    if (this.budget.rows[i].price > 100000) {
+      this.budget.rows[i].price = 0;
+    }
+  }
+
+  checkUnits(i: number) {
+    if (this.budget.rows[i].amount > 100) {
+      this.budget.rows[i].amount = 0;
+    }
   }
 
 }

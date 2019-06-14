@@ -64,17 +64,17 @@
         <ion-row>
           <ion-col class="border" size="7.5">
             <div>
-              <ion-input [(ngModel)]="budget.rows[i].desc"></ion-input>
+              <ion-input [(ngModel)]="budget.rows[i].desc" maxlength="40"></ion-input>
             </div>
           </ion-col>
           <ion-col class="border" size="1.5">
             <div style="text-align: right">
-              <ion-input type="number" [(ngModel)]="budget.rows[i].price"></ion-input>
+              <ion-input type="number" [(ngModel)]="budget.rows[i].price" (ionChange)="checkPriceChange(i)" inputmode="numeric" min="1" (ionChange)="total()"></ion-input>
             </div>
           </ion-col>
           <ion-col class="border" size="1.5">
             <div style="text-align: right">
-              <ion-input type="number" [(ngModel)]="budget.rows[i].amount" (ionBlur)="total()"></ion-input>
+              <ion-input type="number" [(ngModel)]="budget.rows[i].amount" (ionBlur)="total()" (ionChange)="checkUnits(i)" min="1" (ionChange)="total()"></ion-input>
             </div>
           </ion-col>
           <ion-col class="border center" size="1">

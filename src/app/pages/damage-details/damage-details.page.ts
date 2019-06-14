@@ -21,7 +21,6 @@ export class DamageDetailsPage implements OnInit {
   ctx;
   x: any;
 
-
   constructor(private route: ActivatedRoute,
     private router: Router,
     private customerService:CustomerService,
@@ -35,17 +34,12 @@ export class DamageDetailsPage implements OnInit {
       }
     });
 
-   
-    
     setTimeout(() => {
       this.detailsService.getDetail(this.data.id).subscribe( (det) => {
-      this.details = det.payload.data()
-      console.log(this.details)
+      this.details = det.payload.data();
+      console.log(this.details);
     });
     }, 300);
-    
-  
-
   }
 
   ngOnInit() {
@@ -67,8 +61,6 @@ export class DamageDetailsPage implements OnInit {
        console.log(this.customer);
      })
    }, 350);
-
-
     console.log(this.details);
     console.log(this.vehicle);
     console.log(this.customer);
@@ -83,21 +75,20 @@ export class DamageDetailsPage implements OnInit {
     background.src = this.data.imagePath;
 
     background.onload = function(){
-      context.drawImage(background,0,0, document.body.clientWidth*8/20, (document.body.clientHeight*4)/12);   
+      context.drawImage(background,0,0, document.body.clientWidth*8/20, (document.body.clientHeight * 4) / 12);
     }
   }
 
-  comeback(){ 
+  comeback() { 
     this.router.navigate(["/menu"]);
   }
 
-  goBudget(){
-    let navigationExtras: NavigationExtras = {
-      state: {
-        incidence: this.data
-      }
-    };
-    this.router.navigate(['/budget'], navigationExtras);
-  }
-
+  goBudget() {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          incidence: this.data
+        }
+      };
+      this.router.navigate(['/budget'], navigationExtras);
+    }
 }
