@@ -95,7 +95,7 @@
         <ion-label color="dark">TOTAL SIN IVA</ion-label>
       </ion-col>
       <ion-col class="border" size="1.5" style="text-align: right">
-        <ion-label color="dark" [(ngModel)]="budget.totalF">{{ budget.totalF }}</ion-label>
+        <ion-input color="dark" readonly="true" [(ngModel)]="budget.totalF"></ion-input>
       </ion-col>
     </ion-row>
 
@@ -108,7 +108,7 @@
         <ion-label color="dark">IVA 21%</ion-label>
       </ion-col>
       <ion-col class="border" size="1.5" style="text-align: right">
-        <ion-label color="dark">{{budget.ivaF}}</ion-label>
+        <ion-input color="dark" readonly="true" [(ngModel)]="budget.ivaF"></ion-input>
       </ion-col>
     </ion-row>
 
@@ -121,7 +121,7 @@
         <ion-label color="dark">TOTAL</ion-label>
       </ion-col>
       <ion-col class="border" size="1.5" style="text-align: right">
-        <ion-label color="dark">{{budget.totalIva}}</ion-label>
+        <ion-input color="dark"  readonly="true" [(ngModel)]="budget.totalIva"></ion-input>
       </ion-col>
     </ion-row>
   </ion-grid>

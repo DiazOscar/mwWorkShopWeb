@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DamagesService } from 'src/app/services/damages.service';
-import { DamageService } from 'src/app/services/damage.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-menu',
@@ -12,25 +13,28 @@ export class MenuPage implements OnInit {
 
   public damages;
 
-  constructor(private damageFService: DamagesService,
-     private router: Router) { 
+  constructor(private damageFService: DamagesService, private router: Router, public afAuth: AngularFireAuth) {
       this.damageFService.getAllIncidence().subscribe(data => {
         this.damages = data.map(e => {
           return {
             id: e.payload.doc.id,
             ...e.payload.doc.data()
           };
-        })
+        });
       });
      }
 
   ngOnInit() {
-
-    
   }
 
-  goDamage(inc){
-    let navigationExtras: NavigationExtras = {
+  logOut() {
+    this.afAuth.auth.signOut().then(auth => {
+      this.router.navigate(['/login']);
+    });
+  }
+
+  goDamage(inc) {
+    const navigationExtras: NavigationExtras = {
       state: {
         incidence: inc
       }
@@ -40,23 +44,20 @@ export class MenuPage implements OnInit {
     console.log(navigationExtras);
   }
 
-  deleteDamage(inc){
+  deleteDamage(inc) {
     this.damageFService.deleteIncidence(inc.id);
   }
 
-  goUsers(){
+  goUsers() {
     this.router.navigate(['/users']);
   }
 
-  goBudget(inc){
-    let navigationExtras: NavigationExtras = {
+  goBudget(inc) {
+    const navigationExtras: NavigationExtras = {
       state: {
         incidence: inc
       }
     };
     this.router.navigate(['/budget'], navigationExtras);
   }
-
-  
-
 }
