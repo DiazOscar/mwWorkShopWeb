@@ -14,15 +14,15 @@ export class UsersService {
   }
   
   getUser(user){
-    return this.firestore.collection('users').doc(user.user).snapshotChanges();
+    return this.firestore.collection('users').doc(user.mail).snapshotChanges();
   }
 
   createUser(user){
-    return this.firestore.collection('users').doc(user.user).set(user);
+    return this.firestore.collection('users').doc(user.mail).set(user);
   }
 
   updateUser(user){
-    return this.firestore.collection('users').doc(user.user).update(user);
+    return this.firestore.collection('users').doc(user.mail).update(user);
   }
 
   deleteUser(userid: string){

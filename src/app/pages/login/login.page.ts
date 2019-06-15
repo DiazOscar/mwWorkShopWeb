@@ -22,13 +22,13 @@ export class LoginPage implements OnInit {
     const { mail, password } = this;
     try {
       return new Promise((resolve, rejected) => {
-        console.log(mail);
+
         this.afAuth.auth.signInWithEmailAndPassword(mail, password).then(user => {
           resolve(user);
           this.navCtrl.navigateForward(['/menu']);
         }).catch(async err => {
-          console.dir(err);
-          this.toastCtrl.toast('La contraseña no es válida o el usuario no esta registrado');
+
+          this.toastCtrl.toast('La contraseña no es válida o el usuario no está registrado');
         }
         );
       });

@@ -31,7 +31,6 @@ export class RegisterPage implements OnInit {
         mail : this.mail
       };
 
-      console.log(profile);
       if (password !== cpassword) {
         this.toastCtrl.toast('Las contraseñas no coinciden');
       }
@@ -43,7 +42,7 @@ export class RegisterPage implements OnInit {
         this.router.navigate(['/users']);
 
       } catch (err) {
-        console.log(err);
+
         if (err.code === 'auth/email-already-in-use') {
           this.toastCtrl.toast('El usuario se encuentra registrado, revise los campos');
         } else if (err.code === 'auth/invalid-email') {

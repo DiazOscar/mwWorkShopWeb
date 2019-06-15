@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'users', loadChildren: './pages/users/users.module#UsersPageModule' },
   { path: 'damage-details', loadChildren: './pages/damage-details/damage-details.module#DamageDetailsPageModule' },
   { path: 'budget', loadChildren: './pages/budget/budget.module#BudgetPageModule' },  { path: 'view-pdf', loadChildren: './pages/view-pdf/view-pdf.module#ViewPdfPageModule' },
+  { path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' },
 
 ];
 

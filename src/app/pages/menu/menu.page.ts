@@ -41,7 +41,6 @@ export class MenuPage implements OnInit {
     };
 
     this.router.navigate(['/damage-details'], navigationExtras);
-    console.log(navigationExtras);
   }
 
   deleteDamage(inc) {
@@ -59,5 +58,9 @@ export class MenuPage implements OnInit {
       }
     };
     this.router.navigate(['/budget'], navigationExtras);
+  }
+
+  goAbout() {
+    this.router.navigate(['/about']);
   }
 }

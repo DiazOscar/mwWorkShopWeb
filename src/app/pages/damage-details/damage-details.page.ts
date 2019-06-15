@@ -21,42 +21,33 @@ export class DamageDetailsPage implements OnInit {
   ctx;
   x: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, private customerService:CustomerService, 
+  constructor(private route: ActivatedRoute, private router: Router, private customerService: CustomerService,
               private vehicleService: VehicleService, private detailsService: DetailsService) {
 
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.incidence;
-        console.log(this.data);
       }
     });
 
     setTimeout(() => {
       this.detailsService.getDetail(this.data.id).subscribe( (det) => {
       this.details = det.payload.data();
-      console.log(this.details);
     });
     }, 300);
   }
 
   ngOnInit() {
 
-    this.vehicleService.getVehicle(this.data.car).subscribe((veh) =>{
-      this.vehicle = veh.payload.data()
-      console.log(this.vehicle);
+    this.vehicleService.getVehicle(this.data.car).subscribe((veh) => {
+      this.vehicle = veh.payload.data();
    });
 
-  setTimeout (() => {
-    this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) => {
-      this.customer = cus.payload.data()
-       console.log(this.customer);
-    })
-   }, 350);
-    console.log(this.details);
-    console.log(this.vehicle);
-    console.log(this.customer);
-
-
+    setTimeout (() => {
+      this.customerService.getCustomer(this.vehicle.owner).subscribe( (cus) => {
+      this.customer = cus.payload.data();
+    });
+    }, 350);
   }
 
   setBackgroundImage(){

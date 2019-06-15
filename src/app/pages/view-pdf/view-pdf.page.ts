@@ -26,7 +26,6 @@ export class ViewPdfPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.datos;
-        console.log(this.data);
       }
 
       if (this.data.details.damages.length > 9) {
@@ -36,7 +35,7 @@ export class ViewPdfPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subject = 'Presupuesto del vehiculo ' + this.data.vehiculo.enrollment;
+    this.subject = 'Presupuesto del vehículo ' + this.data.vehiculo.enrollment;
     this.body = 'Buenas ' + this.data.cliente.name + ', en el siguiente enlace dispone del presupuesto de su vehiculo. \n\n';
   }
 
@@ -55,10 +54,9 @@ export class ViewPdfPage implements OnInit {
           break;
         case 2:
           if (this.subject.length == 0 || this.data.cliente.email.length == 0) {
-            this.toastCtrl.toast('El mensaje del cliente y cabecera deben de estar rellenos');
+            this.toastCtrl.toast('El mensaje del cliente y la cabecera deben de estar rellenos');
           } else {
           const blob = doc.output('blob');
-          console.log(blob);
           setTimeout(() => {
             const name = this.data.averia.id + '.pdf';
             this.ref = this.storageAng.ref(name);
@@ -70,7 +68,6 @@ export class ViewPdfPage implements OnInit {
                 finalize(() => {
                   this.ref.getDownloadURL().subscribe( dataUrl => {
                     const url = dataUrl;
-                    console.log(url);
                     const email = {
                       to: this.data.cliente.email,
                       cc: 'oddmworkshop@gmail.com',

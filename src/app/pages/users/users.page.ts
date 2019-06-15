@@ -25,8 +25,6 @@ export class UsersPage implements OnInit {
         };
       });
     });
-
-    console.log(this.users);
   }
 
   goRegister(){
@@ -34,7 +32,6 @@ export class UsersPage implements OnInit {
   }
 
   async delete(user) {
-    console.log(user);
     const input = await this.alertCtrl.create({
       header: 'Eliminar usuario',
       subHeader: 'Introduce contraseña del usuario',
@@ -51,14 +48,10 @@ export class UsersPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
+          handler: (blah) => {}
         }, {
           text: 'Eliminar',
           handler: async (data) => {
-            console.log('Confirm Okay', data.txtPassword);
-            console.log(this.afAuth);
             this.userService.deleteUser(user.user);
             this.afAuth.auth.signInWithEmailAndPassword(user.mail, data.txtPassword)
             .then(function (user) {

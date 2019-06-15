@@ -31,14 +31,12 @@ export class BudgetPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.incidence;
-        console.log(this.data);
       }
     });
 
     setTimeout(() => {
       this.detailsService.getDetail(this.data.id).subscribe((det) => {
         this.details = det.payload.data();
-        console.log(this.details);
       });
     }, 350);
 
@@ -47,13 +45,11 @@ export class BudgetPage implements OnInit {
   ngOnInit() {
     this.vehicleService.getVehicle(this.data.car).subscribe((veh) => {
       this.vehicle = veh.payload.data();
-      console.log(this.vehicle);
     });
 
     setTimeout(() => {
       this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) => {
         this.customer = cus.payload.data();
-        console.log(this.customer);
       });
     }, 350);
 
@@ -82,24 +78,22 @@ export class BudgetPage implements OnInit {
   total() {
     let iva: number = 0;
     let cant: number = 0;
-    for (let row of this.budget.rows) {
-      console.log(row);
+    for (const row of this.budget.rows) {
       cant += row.price * row.amount;
       iva += (row.price * row.amount) * 0.21;
     }
     this.budget.totalF = String(cant.toFixed(2));
     this.budget.ivaF = String((Math.round(iva * 100) / 100).toFixed(2));
-    this.budget.totalIva = String(Math.round(cant + iva).toFixed(2));
-    console.log(this.budget.totalF, this.budget.ivaF, this.budget.totalIva);
+    this.budget.totalIva = String(Number(this.budget.totalF) + Number(this.budget.ivaF));
   }
 
   goPDF() {
     if (this.budget.rows.length == 0) {
-      this.toastCtrl.toast('Debes de rellenar el presupuesto');
+      this.toastCtrl.toast('Debes rellenar el presupuesto');
     } else if (this.checkDescription()) {
-      this.toastCtrl.toast('Tienes que rellenar todos los campos');
+      this.toastCtrl.toast('Todos los campos son obligatorios');
     } else if (this.checkPrice()) {
-      this.toastCtrl.toast('Los precios no pueden estar a 0');
+      this.toastCtrl.toast('Debes de introducir el precio');
     } else {
 
       const data = {
