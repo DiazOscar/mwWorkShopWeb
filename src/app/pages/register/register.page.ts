@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { ToastController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast.service';

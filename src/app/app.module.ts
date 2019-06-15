@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import {AngularFireAuthModule} from "angularfire2/auth"
+import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import { AngularFireStorageModule} from 'angularfire2/storage';
 
@@ -22,7 +22,7 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  
+
   imports: [
     BrowserModule, IonicModule.forRoot(),
     AppRoutingModule,
