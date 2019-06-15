@@ -21,11 +21,8 @@ export class DamageDetailsPage implements OnInit {
   ctx;
   x: any;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private customerService:CustomerService,
-    private vehicleService: VehicleService,
-    private detailsService: DetailsService) {
+  constructor(private route: ActivatedRoute, private router: Router, private customerService:CustomerService, 
+              private vehicleService: VehicleService, private detailsService: DetailsService) {
 
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -48,18 +45,12 @@ export class DamageDetailsPage implements OnInit {
       this.vehicle = veh.payload.data()
       console.log(this.vehicle);
    });
- 
-  //  this.canvasElement = this.canvas.nativeElement;
-  //  this.setBackgroundImage();
-  //  this.canvasElement.width = document.body.clientWidth*8/ 20 ;
-  //  this.canvasElement.height = (document.body.clientHeight*4)/12;
-  //  this.ctx = this.canvasElement.getContext('2d');
 
-   setTimeout(() => {
-     this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) => {
-       this.customer = cus.payload.data()
+  setTimeout (() => {
+    this.customerService.getCustomer(this.vehicle.owner).subscribe((cus) => {
+      this.customer = cus.payload.data()
        console.log(this.customer);
-     })
+    })
    }, 350);
     console.log(this.details);
     console.log(this.vehicle);

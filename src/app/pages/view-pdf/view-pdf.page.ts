@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from 'angularfire2/storage';
 import { finalize } from 'rxjs/operators';
-import { ToastController } from '@ionic/angular';
+import { ToastService } from '../../services/toast.service';
+
 
 @Component({
   selector: 'app-view-pdf',
@@ -20,48 +21,46 @@ export class ViewPdfPage implements OnInit {
   subject: any;
   body: any;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private storageAng: AngularFireStorage,
-    private emailComposer: EmailComposer, private toastCtrl: ToastController) {
+  constructor(private route: ActivatedRoute, private router: Router, private storageAng: AngularFireStorage,
+              private emailComposer: EmailComposer, private toastCtrl: ToastService) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.datos;
         console.log(this.data);
       }
 
-      if(this.data.details.damages.length > 9){
+      if (this.data.details.damages.length > 9) {
 
       }
     });
   }
 
   ngOnInit(): void {
-    this.subject = 'Presupuesto del vehiculo '+this.data.vehiculo.enrollment;
-    this.body = 'Buenas '+this.data.cliente.name+ ', en el siguiente enlace dispone del presupuesto de su vehiculo. \n\n';
+    this.subject = 'Presupuesto del vehiculo ' + this.data.vehiculo.enrollment;
+    this.body = 'Buenas ' + this.data.cliente.name + ', en el siguiente enlace dispone del presupuesto de su vehiculo. \n\n';
   }
 
   async exportPdf(opcion) {
-    const div = document.getElementById("pdf");
-    const options = { background: "white", height: 845, width: 595 };
+    const div = document.getElementById('pdf');
+    const options = { background: 'white', height: 845, width: 595 };
     domtoimage.toPng(div, options).then((dataUrl) => {
       //Initialize JSPDF
-      var doc = new jsPDF("p", "mm", "a4");
+      const doc = new jsPDF('p', 'mm', 'a4');
       //Add image Url to PDF
       doc.addImage(dataUrl, 'PNG', 0, 0, 210, 340);
 
       switch (opcion) {
         case 1:
-          doc.save(this.data.averia.id + ".pdf");
+          doc.save(this.data.averia.id + '.pdf');
           break;
         case 2:
           if (this.subject.length == 0 || this.data.cliente.email.length == 0) {
-            this.toast('El mensaje del cliente y cabecera deben de estar rellenos');
+            this.toastCtrl.toast('El mensaje del cliente y cabecera deben de estar rellenos');
           } else {
-          let blob = doc.output('blob');
+          const blob = doc.output('blob');
           console.log(blob);
           setTimeout(() => {
-            let name = this.data.averia.id + ".pdf"
+            const name = this.data.averia.id + '.pdf';
             this.ref = this.storageAng.ref(name);
             this.task = this.storageAng.ref(name).put(blob);
 
@@ -69,10 +68,10 @@ export class ViewPdfPage implements OnInit {
               .snapshotChanges()
               .pipe(
                 finalize(() => {
-                  this.ref.getDownloadURL().subscribe(dataUrl => {
-                    let url = dataUrl;
-                    console.log(url)
-                    let email = {
+                  this.ref.getDownloadURL().subscribe( dataUrl => {
+                    const url = dataUrl;
+                    console.log(url);
+                    const email = {
                       to: this.data.cliente.email,
                       cc: 'oddmworkshop@gmail.com',
                       subject: this.subject,
@@ -89,25 +88,13 @@ export class ViewPdfPage implements OnInit {
       }
     }
     })
-      .catch(function (error) {
+      .catch( function(error) {
 
       });
   }
 
   back() {
-    this.router.navigate(["/menu"]);
-  }
-
-  async toast(message: any) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      color: 'light',
-      duration: 2000,
-      mode: 'ios',
-      cssClass: 'toastcss',
-    });
-
-    toast.present();
+    this.router.navigate(['/menu']);
   }
 
 }

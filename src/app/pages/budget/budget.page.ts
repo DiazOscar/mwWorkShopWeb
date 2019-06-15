@@ -1,11 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, ViewChildren  } from '@angular/core';
+import { Component, OnInit, ViewChildren  } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { DetailsService } from 'src/app/services/details.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { ToastController, NavController } from '@ionic/angular';
-
-
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-budget',
@@ -13,6 +11,7 @@ import { ToastController, NavController } from '@ionic/angular';
   styleUrls: ['./budget.page.scss'],
 })
 export class BudgetPage implements OnInit {
+
   @ViewChildren('inputs') myInput;
 
   data: any;
@@ -27,11 +26,8 @@ export class BudgetPage implements OnInit {
     totalIva: ''
   };
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private customerService: CustomerService,
-    private vehicleService: VehicleService,
-    private detailsService: DetailsService, private toastCtrl: ToastController , private renderer: Renderer2) {
+  constructor(private route: ActivatedRoute, private router: Router, private customerService: CustomerService,
+              private vehicleService: VehicleService, private detailsService: DetailsService, private toastCtrl: ToastService) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.incidence;
@@ -94,18 +90,19 @@ export class BudgetPage implements OnInit {
     this.budget.totalF = String(cant.toFixed(2));
     this.budget.ivaF = String((Math.round(iva * 100) / 100).toFixed(2));
     this.budget.totalIva = String(Math.round(cant + iva).toFixed(2));
-    console.log(this.budget.totalF,this.budget.ivaF, this.budget.totalIva);
+    console.log(this.budget.totalF, this.budget.ivaF, this.budget.totalIva);
   }
 
   goPDF() {
     if (this.budget.rows.length == 0) {
-      this.toast('Debes de rellenar el presupuesto');
+      this.toastCtrl.toast('Debes de rellenar el presupuesto');
     } else if (this.checkDescription()) {
-      this.toast('Tienes que rellenar todos los campos');
+      this.toastCtrl.toast('Tienes que rellenar todos los campos');
     } else if (this.checkPrice()) {
-      this.toast('Los precios no pueden estar a 0');
+      this.toastCtrl.toast('Los precios no pueden estar a 0');
     } else {
-      let datos = {
+
+      const data = {
         averia: this.data,
         detalles: this.details,
         cliente: this.customer,
@@ -113,20 +110,19 @@ export class BudgetPage implements OnInit {
         budget: this.budget
       };
 
-      let navigationExtras: NavigationExtras = {
+      const navigationExtras: NavigationExtras = {
         state: {
-          datos: datos
+          datos: data
         }
       };
 
       this.router.navigate(['/view-pdf'], navigationExtras);
-      console.log(navigationExtras);
     }
   }
 
   checkDescription(): Boolean {
     let answer: Boolean = false;
-    for (let bu of this.budget.rows) {
+    for (const bu of this.budget.rows) {
       if (bu.desc.length == 0) {
         answer = true;
         break;
@@ -137,25 +133,13 @@ export class BudgetPage implements OnInit {
 
   checkPrice(): Boolean {
     let answer: Boolean = false;
-    for (let bu of this.budget.rows) {
+    for (const bu of this.budget.rows) {
       if (bu.price == 0) {
         answer = true;
         break;
       }
     }
     return answer;
-  }
-
-  async toast(message: any) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      color: 'light',
-      duration: 2000,
-      mode: 'ios',
-      cssClass: 'toastcss',
-    });
-
-    toast.present();
   }
 
   back() {
@@ -166,8 +150,6 @@ export class BudgetPage implements OnInit {
     if (this.budget.rows[i].price > 100000) {
       this.budget.rows[i].price = 0;
     }
-    
-    //this.renderer.selectRootElement(this.myInput.nativeElement).focus();
   }
 
   checkUnits(i: number) {

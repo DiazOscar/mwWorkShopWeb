@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from "@angular/fire/auth"
-import { ToastController, NavController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { NavController } from '@ionic/angular';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -9,35 +10,27 @@ import { ToastController, NavController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  mail: string = "";
-  password: string = "";
+  mail: string = '';
+  password: string = '';
 
-  constructor(public afAuth: AngularFireAuth, private navCtrl: NavController, public toastCtrl: ToastController) { }
+  constructor(public afAuth: AngularFireAuth, private navCtrl: NavController, public toastCtrl: ToastService) { }
 
   ngOnInit() {
   }
 
   async login() {
-    const { mail, password } = this
+    const { mail, password } = this;
     try {
       return new Promise((resolve, rejected) => {
         console.log(mail);
         this.afAuth.auth.signInWithEmailAndPassword(mail, password).then(user => {
-          resolve(user)
+          resolve(user);
           this.navCtrl.navigateForward(['/menu']);
         }).catch(async err => {
           console.dir(err);
-          const toast = await this.toastCtrl.create({
-            message: err+"",
-            color: "light",
-            duration: 2000,
-            mode: "ios",
-            cssClass: "toastcss",
-          });
-
-          toast.present();
+          this.toastCtrl.toast('La contraseña no es válida o el usuario no esta registrado');
         }
-        )
+        );
       });
     } catch (err) {
 

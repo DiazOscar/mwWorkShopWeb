@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -10,77 +11,55 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  user: string = "";
-  password: string = "";
-  cpassword: string = "";
-  mail: string = "";
-  rol: string = "";
+  user: any = '';
+  password: any = '';
+  cpassword: any = '';
+  mail: any = '';
+  rol: any = '';
 
-  constructor(public afAuth: AngularFireAuth,
-    private userService: UsersService,
-    public toastCtrl: ToastController, 
-    private router: Router) { }
+  constructor(public afAuth: AngularFireAuth, private userService: UsersService, public toastCtrl: ToastService,
+              private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  async register(){
-    if(this.user != "" && this.rol != "" && this.mail != "" && this.password != "" && this.cpassword != ""){ 
-      const {mail, password, cpassword} = this
-      
-      let profile = {
+  async register() {
+    if (this.user != '' && this.rol != '' && this.mail != '' && this.password != '' && this.cpassword != '') {
+      const {mail, password, cpassword} = this;
+
+      const profile = {
         user : this.user,
         rol : this.rol,
         mail : this.mail
-      }
-  
-      console.log(profile);
-      if(password !== cpassword){
-        const toast = await this.toastCtrl.create({
-          message: "Las contraseñas no coinciden",
-          color: "light",
-          duration: 2000,
-          mode: "ios",
-          cssClass: "toastcss",
-        });
+      };
 
-        toast.present();
-        return console.log("password don't match");
+      console.log(profile);
+      if (password !== cpassword) {
+        this.toastCtrl.toast('Las contraseñas no coinciden');
       }
-      
-      try{        
+
+      try {
+
         const res = await this.afAuth.auth.createUserWithEmailAndPassword(mail, password);
         this.userService.createUser(profile);
-        this.router.navigate(["/users"]);
-      }catch(err){
+        this.router.navigate(['/users']);
+
+      } catch (err) {
         console.log(err);
-        const toast = await this.toastCtrl.create({
-          message: err+"",
-          color: "light",
-          duration: 2000,
-          mode: "ios",
-          cssClass: "toastcss",
-        });
-
-        toast.present();
+        if (err.code === 'auth/email-already-in-use') {
+          this.toastCtrl.toast('El usuario se encuentra registrado, revise los campos');
+        } else if (err.code === 'auth/invalid-email') {
+          this.toastCtrl.toast('Correo electrónico invalido');
+        } else if (err.code === 'auth/weak-password') {
+          this.toastCtrl.toast('La contraseña debe de tener 6 caracteres');
+        }
       }
-    }else{
-      const toast = await this.toastCtrl.create({
-        message: "Todos los campos deben estar rellenos",
-        color: "light",
-        duration: 2000,
-        mode: "ios",
-        cssClass: "toastcss",
-      });
-
-      toast.present();
-      return console.log("password don't match");
+    } else {
+      this.toastCtrl.toast('Todos los campos deben estar rellenos');
     }
-    
   }
 
-  back(){
-    this.router.navigate(["/users"]);
+  back() {
+    this.router.navigate(['/users']);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
-import { NavController, AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
@@ -12,12 +12,10 @@ import { Router } from '@angular/router';
 export class UsersPage implements OnInit {
 
   users = [];
-  
-  constructor(private userService: UsersService,
-    private router: Router,
-    public alertCtrl: AlertController,
-    public afAuth: AngularFireAuth) { }
-  
+
+  constructor(private userService: UsersService, private router: Router, public alertCtrl: AlertController,
+              public afAuth: AngularFireAuth) { }
+
   ngOnInit() {
     this.userService.getAllUser().subscribe(data => {
       this.users = data.map(e => {
@@ -25,7 +23,7 @@ export class UsersPage implements OnInit {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
         };
-      })
+      });
     });
 
     console.log(this.users);
@@ -35,12 +33,12 @@ export class UsersPage implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  async delete(user){
+  async delete(user) {
     console.log(user);
     const input = await this.alertCtrl.create({
       header: 'Eliminar usuario',
       subHeader: 'Introduce contraseña del usuario',
-      inputs: 
+      inputs:
       [
         {
           name: 'txtPassword',
@@ -64,7 +62,7 @@ export class UsersPage implements OnInit {
             this.userService.deleteUser(user.user);
             this.afAuth.auth.signInWithEmailAndPassword(user.mail, data.txtPassword)
             .then(function (user) {
-            
+
               user.user.delete();
             });
           }
@@ -76,8 +74,7 @@ export class UsersPage implements OnInit {
   }
 
   back(){
-    this.router.navigate(["/menu"]);
+    this.router.navigate(['/menu']);
   }
-  
 
 }

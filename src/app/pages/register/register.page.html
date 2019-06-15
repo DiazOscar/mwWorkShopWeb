@@ -14,14 +14,14 @@
 
   <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
     <ion-icon name="person" padding color="dark"></ion-icon>
-    <ion-input type="text" name="user" [(ngModel)]="user" color="dark" placeholder="Usuario"></ion-input>
+    <ion-input type="text" name="user" [(ngModel)]="user" maxlength="35" color="dark" placeholder="Usuario"></ion-input>
   </ion-item>
 
   <ion-radio-group [(ngModel)]="rol">
     <ion-row>
       <ion-col>
         <ion-item style=" border: 2px #000 solid" color="primary">
-          <ion-radio color="dark" value="Mecanico"></ion-radio>
+          <ion-radio color="dark" value="Mecanico" checked="true"></ion-radio>
           <ion-label>Mecanico</ion-label>
         </ion-item>
       </ion-col>
@@ -37,17 +37,17 @@
 
   <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
     <ion-icon name="mail-unread" padding color="dark"></ion-icon>
-    <ion-input type="mail" name="mail" [(ngModel)]="mail" color="dark" placeholder="Email"></ion-input>
+    <ion-input type="mail" name="mail" [(ngModel)]="mail" color="dark" maxlength="35" placeholder="Email"></ion-input>
   </ion-item>
 
   <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
     <ion-icon name="lock" padding color="dark"></ion-icon>
-    <ion-input type="password" name="password" [(ngModel)]="password" color="dark" placeholder="Contraseña"></ion-input>
+    <ion-input type="password" name="password" [(ngModel)]="password" maxlength="15" color="dark" placeholder="Contraseña"></ion-input>
   </ion-item>
 
   <ion-item style="margin-bottom: 20px; margin-top: 20px; border: 2px #000 solid" color="primary">
     <ion-icon name="lock" padding color="dark"></ion-icon>
-    <ion-input type="password" name="cpassword" [(ngModel)]="cpassword" color="dark" placeholder="Repetir Contraseña">
+    <ion-input type="password" name="cpassword" [(ngModel)]="cpassword" maxlength="15" color="dark" placeholder="Repetir Contraseña">
     </ion-input>
   </ion-item>
 
